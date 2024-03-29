@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import "./Category.css";
+import styles from "./Category.module.css";
 
 interface Prop {
   buttonClicked: MouseEventHandler<HTMLButtonElement>;

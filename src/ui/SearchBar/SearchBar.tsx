@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import "./SearchBar.css";
+import styles from "./SearchBar.module.css";
 
 interface Prop {
   handleInputChange: ChangeEventHandler<HTMLInputElement>;
@@ -35,7 +35,7 @@ const SearchBar: React.FC<Prop> = ({
       </div>
       {!!searchTerm.trim() && (
         <div className="SearchResult">
-          <span>"{searchTerm.trim()}"</span>
+          <span>{searchTerm.trim()}</span>
           <span className="lightText">으로 검색한 결과입니다.</span>
         </div>
       )}

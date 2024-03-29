@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./Cta.css";
+import styles from "./Cta.module.css";
 
 interface Prop {
   children: ReactNode;

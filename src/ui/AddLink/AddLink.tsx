@@ -1,4 +1,4 @@
-import "./AddLink.css";
+import styles from "./AddLink.module.css";
 import { RefObject } from "react";
 
 const AddLink = ({

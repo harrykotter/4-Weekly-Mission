@@ -4,7 +4,7 @@ import { CardList } from "@/src/ui/CardList/CardList";
 import Layout from "@/src/feature/Layout/Layout";
 import { Card } from "@/src/ui/Card/Card";
 import { useGetFolder } from "@/src/hooks/useGetFolder";
-import "./SharedPage.css";
+import styles from "@/styles/SharedPage.module.css";
 import { ChangeEventHandler, useState } from "react";
 
 const SharedPage = () => {
@@ -31,13 +31,13 @@ const SharedPage = () => {
 
   return (
     <Layout>
-      <div className="SharedPage">
+      <div className={styles.SharedPage}>
         <FolderInfo
           profileImage={profileImage}
           ownerName={ownerName}
           folderName={folderName}
         />
-        <div className="SharedPage-items">
+        <div className={styles.SharedPageItems}>
           <SearchBar
             handleInputChange={handleInputChange}
             handleInputClear={handleInputClear}

@@ -1,7 +1,7 @@
 import { ROUTE } from "../../util/constant";
 import Cta from "../../ui/Cta/Cta";
 import Profile from "../../ui/Profile/Profile";
-import "./NavigationBar.css";
+import styles from "./NavigationBar.module.css";
 
 interface NavProps {
   isNavFixed?: boolean;

@@ -9,7 +9,7 @@ import Category from "@/src/ui/Category/Category";
 import { EditLink } from "@/src/ui/EditLink/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
 
-import "./FolderPage.css";
+import styles from "@/styles/FolderPage.module.css";
 import {
   useState,
   useRef,
@@ -115,9 +115,9 @@ const FolderPage: React.FC = () => {
         />
       )}
       <Layout isNavFixed={navFixed} footerRef={footerRef}>
-        <div className="FolderPage">
+        <div className={styles.FolderPage}>
           <AddLink addLinkRef={addLinkRef} />
-          <div className="FolderPage-items">
+          <div className={styles.FolderPageItems}>
             <SearchBar
               handleInputChange={handleInputChange}
               handleInputClear={handleInputClear}
@@ -144,9 +144,9 @@ const FolderPage: React.FC = () => {
                 ))}
               </CardList>
             ) : (
-              <div className="NoLink">저장된 링크가 없습니다.</div>
+              <div className={styles.NoLink}>저장된 링크가 없습니다.</div>
             )}
-            <button className="mobile-add-button">폴더 추가하기 +</button>
+            <button className={styles.MobileAddButton}>폴더 추가하기 +</button>
             {isAddLinkFixed && <AddLink isAddLinkFixed={isAddLinkFixed} />}
           </div>
         </div>

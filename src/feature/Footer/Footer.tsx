@@ -1,5 +1,5 @@
 import { ROUTE } from "@/src/util/constant";
-import "./Footer.css";
+import styles from "./Footer.module.css";
 import TEXT from "./constant";
 import { RefObject } from "react";
 

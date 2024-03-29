@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import "./EditLink.css";
+import styles from "./EditLink.module.css";
 
 interface Props {
   currentCategory: string;

@@ -1,4 +1,4 @@
-import "./Profile.css";
+import styles from "./Profile.module.css";
 
 interface Prop {
   profile: {

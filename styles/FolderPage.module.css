@@ -13,7 +13,7 @@
   }
 }
 
-.FolderPage-items {
+.FolderPageItems {
   display: flex;
   flex-direction: column;
   align-items: center;
