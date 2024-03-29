@@ -1,4 +1,4 @@
-import styles from "./Profile.module.css";
+import styles from "@/styles/ui/Profile.module.css";
 
 interface Prop {
   profile: {
@@ -9,13 +9,13 @@ interface Prop {
 
 const Profile = ({ profile }: Prop) => {
   return (
-    <div className="Profile">
+    <div className={styles.Profile}>
       <img
-        className="Profile-image"
+        className={styles.ProfileImage}
         src={profile.profileImageSource}
         alt="프로필 이미지"
       />
-      <span className="Profile-email">{profile.email}</span>
+      <span className={styles.ProfileEmail}>{profile.email}</span>
     </div>
   );
 };

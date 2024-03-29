@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import styles from "./SearchBar.module.css";
+import styles from "@/styles/ui/SearchBar.module.css";
 
 interface Prop {
   handleInputChange: ChangeEventHandler<HTMLInputElement>;
@@ -14,29 +14,29 @@ const SearchBar: React.FC<Prop> = ({
 }) => {
   return (
     <>
-      <div className="SearchBar">
+      <div className={styles.SearchBar}>
         <input
-          className="SearchBar-input"
+          className={styles.SearchBarInput}
           type="search"
           placeholder="링크를 검색해 보세요."
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <img src="images/search.svg" alt="검색" className="lenzIcon" />
+        <img src="images/search.svg" alt="검색" className={styles.lenzIcon} />
         <button onClick={handleInputClear}>
           {!!searchTerm && (
             <img
               src="images/search-clear.svg"
               alt="지우기"
-              className="clearIcon"
+              className={styles.clearIcon}
             />
           )}
         </button>
       </div>
       {!!searchTerm.trim() && (
-        <div className="SearchResult">
+        <div className={styles.SearchResult}>
           <span>{searchTerm.trim()}</span>
-          <span className="lightText">으로 검색한 결과입니다.</span>
+          <span className={styles.lightText}>으로 검색한 결과입니다.</span>
         </div>
       )}
     </>

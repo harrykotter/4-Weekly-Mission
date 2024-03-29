@@ -1,11 +1,11 @@
-.EditLink-wrapper {
+.EditLinkWrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-.current-category {
+.currentCategory {
   font-size: 2.4rem;
   font-weight: 600;
 }
@@ -15,7 +15,7 @@
   gap: 0.8rem;
 }
 
-.edit-button {
+.editButton {
   color: var(--gray60);
   display: flex;
   align-items: center;

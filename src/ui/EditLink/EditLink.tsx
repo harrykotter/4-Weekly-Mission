@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import styles from "./EditLink.module.css";
+import styles from "@/styles/ui/EditLink.module.css";
 
 interface Props {
   currentCategory: string;
@@ -9,12 +9,12 @@ interface Props {
 export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
   const isCurrentAll = currentCategory === "전체";
   return (
-    <div className="EditLink-wrapper">
-      <div className="current-category">{currentCategory}</div>
+    <div className={styles.EditLinkWrapper}>
+      <div className={styles.currentCategory}>{currentCategory}</div>
       {!isCurrentAll && (
-        <div className="EditLinks">
+        <div className={styles.EditLinks}>
           <button
-            className="edit-button"
+            className={styles.editButton}
             onClick={handleEditClick}
             id="shareFolder"
           >
@@ -22,7 +22,7 @@ export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
             공유하기
           </button>
           <button
-            className="edit-button"
+            className={styles.editButton}
             onClick={handleEditClick}
             id="changeFolderName"
           >
@@ -30,7 +30,7 @@ export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
             이름 변경
           </button>
           <button
-            className="edit-button"
+            className={styles.editButton}
             onClick={handleEditClick}
             id="deleteFolder"
           >

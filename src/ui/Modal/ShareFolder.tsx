@@ -1,4 +1,4 @@
-import styles from "./Modal.module.css";
+import styles from "@/styles/ui/Modal.module.css";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const currentUrl = "https://weekly-mission-week9.vercel.app/shared";

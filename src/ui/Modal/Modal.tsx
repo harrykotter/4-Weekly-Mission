@@ -1,4 +1,4 @@
-import styles from "./Modal.module.css";
+import styles from "@/styles/ui/Modal.module.css";
 import AddToMyFolder from "./AddToMyfolder";
 import ChangeFolderName from "./ChangeFolderName";
 import DeleteLink from "./DeleteLink";

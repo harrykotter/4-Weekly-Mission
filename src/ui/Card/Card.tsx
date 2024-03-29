@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, MouseEventHandler } from "react";
-import styles from "./Card.module.css";
+import styles from "@/styles/ui/Card.module.css";
 
 interface Prop {
   url: string;
@@ -50,30 +50,34 @@ export const Card = ({
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <div className="Card">
+      <div className={styles.Card}>
         <div
           style={{
             backgroundImage: `url(${imageSource ?? "images/card-default.png"})`,
           }}
-          className="CardImage"
+          className={styles.CardImage}
         >
           {favorite !== undefined && (
-            <img className="star-button" alt="star" src={isFavorite} />
+            <img className={styles.starButton} alt="star" src={isFavorite} />
           )}
         </div>
-        <div className="CardContent">
-          <div className="CardContent-top">
-            <span className="CardContent-elapsed-time">{elapsedTime}</span>
+        <div className={styles.CardContent}>
+          <div className={styles.CardContentTop}>
+            <span className={styles.CardContentElapsedTime}>{elapsedTime}</span>
             {isFolder && (
               <button onClick={handleKebabClick}>
-                <img className="kebab" src="images/kebab.png" alt="menu" />
+                <img
+                  className={styles.kebab}
+                  src="images/kebab.png"
+                  alt="menu"
+                />
               </button>
             )}
             {kebabOpen && (
-              <div className="kebabMenu" ref={ref}>
+              <div className={styles.kebabMenu} ref={ref}>
                 <button
                   id="deleteLink"
-                  className="kebabMenu-button"
+                  className={styles.kebabMenuButton}
                   data-url={url}
                   onClick={handleModalClick}
                 >
@@ -81,7 +85,7 @@ export const Card = ({
                 </button>
                 <button
                   id="addToFolder"
-                  className="kebabMenu-button"
+                  className={styles.kebabMenuButton}
                   onClick={handleModalClick}
                 >
                   폴더에 추가
@@ -89,8 +93,8 @@ export const Card = ({
               </div>
             )}
           </div>
-          <p className="CardContent-description">{description}</p>
-          <span className="CardContent-created-at">{createdAt}</span>
+          <p className={styles.CardContentDescription}>{description}</p>
+          <span className={styles.CardContentCreatedAt}>{createdAt}</span>
         </div>
       </div>
     </a>

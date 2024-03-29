@@ -19,14 +19,14 @@
   padding: 1rem 3.2rem;
 }
 
-.AddLink-items {
+.AddLinkItems {
   width: 100%;
   max-width: 80rem;
   position: relative;
   margin: auto;
 }
 
-.AddLink-input {
+.AddLinkInput {
   margin: auto;
   width: 100%;
   padding: 1rem 12rem 1rem 4rem;
@@ -35,7 +35,7 @@
   height: 6rem;
 }
 
-.AddLink-icon {
+.AddLinkIcon {
   position: absolute;
   width: 2rem;
   height: 2rem;
@@ -44,7 +44,7 @@
   left: 1.6rem;
 }
 
-.AddLink-button {
+.AddLinkButton {
   position: absolute;
   padding: 1rem 1.6rem;
   top: 50%;

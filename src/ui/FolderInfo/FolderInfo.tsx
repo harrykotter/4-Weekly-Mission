@@ -1,4 +1,4 @@
-import "./FolderInfo.css";
+import styles from "@/styles/ui/FolderInfo.module.css";
 
 interface Props {
   profileImage: string;
@@ -8,14 +8,14 @@ interface Props {
 
 const FolderInfo = ({ profileImage, ownerName, folderName }: Props) => {
   return (
-    <div className="FolderInfo">
+    <div className={styles.FolderInfo}>
       <img
-        className="FolderInfo-profile"
+        className={styles.FolderInfoProfile}
         src={profileImage}
         alt="폴더 소유자 프로필 이미지"
       />
-      <span className="FolderInfo-owner">{ownerName}</span>
-      <h2 className="FolderInfo-folder">{folderName}</h2>
+      <span className={styles.FolderInfoOwner}>{ownerName}</span>
+      <h2 className={styles.FolderInfoFolder}>{folderName}</h2>
     </div>
   );
 };

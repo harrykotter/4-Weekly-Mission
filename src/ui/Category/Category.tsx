@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import styles from "./Category.module.css";
+import styles from "@/styles/ui/Category.module.css";
 
 interface Prop {
   buttonClicked: MouseEventHandler<HTMLButtonElement>;
@@ -15,14 +15,14 @@ const Category = ({
   handleModalClick,
 }: Prop) => {
   return (
-    <div className="Category-wrapper">
-      <div className="Categories">
+    <div className={styles.CategoryWrapper}>
+      <div className={styles.Categories}>
         {linkData?.map((folder: any) => (
           <button
             className={
               folder.name === currentCategory
-                ? "CategoryButton button-clicked"
-                : "CategoryButton"
+                ? `${styles.CategoryButton} ${styles.buttonClicked}`
+                : styles.CategoryButton
             }
             key={folder?.id}
             onClick={buttonClicked}
@@ -32,7 +32,11 @@ const Category = ({
           </button>
         ))}
       </div>
-      <button className="add-folder" onClick={handleModalClick} id="addFolder">
+      <button
+        className={styles.addFolder}
+        onClick={handleModalClick}
+        id="addFolder"
+      >
         폴더 추가하기 +
       </button>
     </div>

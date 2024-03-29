@@ -1,22 +1,22 @@
 import { ROUTE } from "@/src/util/constant";
-import styles from "./Footer.module.css";
+import styles from "@/styles/feature/Footer.module.css";
 import TEXT from "./constant";
 import { RefObject } from "react";
 
 const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
   return (
-    <footer className="Footer" ref={footerRef}>
-      <div className="Footer-items">
-        <span className="Footer-copyright">{TEXT.codeit}</span>
-        <div className="Footer-links">
-          <a className="Footer-link" href={ROUTE.개인정보처리방침}>
+    <footer className={styles.Footer} ref={footerRef}>
+      <div className={styles.FooterItems}>
+        <span className={styles.FooterCopyright}>{TEXT.codeit}</span>
+        <div className={styles.FooterLinks}>
+          <a className={styles.FooterLink} href={ROUTE.개인정보처리방침}>
             {TEXT.privacyPolicy}
           </a>
-          <a className="Footer-link" href={ROUTE.FAQ}>
+          <a className={styles.FooterLink} href={ROUTE.FAQ}>
             {TEXT.faq}
           </a>
         </div>
-        <div className="Footer-sns">
+        <div className={styles.FooterSns}>
           <a
             href="https://www.facebook.com/"
             target="_blank"

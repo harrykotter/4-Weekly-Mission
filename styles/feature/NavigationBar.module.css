@@ -8,11 +8,11 @@
   background-color: var(--light-blue);
 }
 
-.NavigationBar.Nav-fixed {
+.NavigationBar.NavFixed {
   position: relative;
 }
 
-.NavigationBar-items {
+.NavigationBarItems {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,7 +31,7 @@
   }
 }
 
-.NavigationBar-logo {
+.NavigationBarLogo {
   height: 1.6rem;
 
   @media (min-width: 768px) {
@@ -39,7 +39,7 @@
   }
 }
 
-.NavigationBar-signin {
+.NavigationBarSignin {
   display: inline-block;
   width: 8rem;
   padding: 1rem 0;

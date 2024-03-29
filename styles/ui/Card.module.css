@@ -31,7 +31,7 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.CardContent-top {
+.CardContentTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,22 +50,22 @@
   z-index: 5;
 }
 
-.kebabMenu-button {
+.kebabMenuButton {
   font-size: 1.4rem;
   background-color: var(--white);
   padding: 0.7rem 1.2rem;
 }
-.kebabMenu-button:hover {
+.kebabMenuButton:hover {
   background-color: var(--light-blue);
   color: var(--primary);
 }
 
-.CardContent-elapsed-time {
+.CardContentElapsedTime {
   font-size: 1.3rem;
   color: var(--text-content-gray);
 }
 
-.CardContent-description {
+.CardContentDescription {
   height: 4.9rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -77,14 +77,11 @@
   line-height: 150%;
 }
 
-.CardContent-created-at {
+.CardContentCreatedAt {
   font-size: 1.4rem;
   color: var(--text-content-black);
 }
 
-/* .CardContent.CardContent-hovered {
-  background-color: var(--light-blue);
-} */
 .CardImage {
   position: relative;
   width: 100%;
@@ -101,11 +98,7 @@
   }
 }
 
-/* .CardImage.CardImage-zoom-in {
-  background-size: 130%;
-} */
-
-.star-button {
+.starButton {
   position: absolute;
   right: 1rem;
   top: 1rem;

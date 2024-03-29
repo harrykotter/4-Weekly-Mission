@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import styles from "./CardList.module.css";
+import styles from "@/styles/ui/CardList.module.css";
 
 interface CardListProp {
   children: ReactNode;
 }
 
 export const CardList = ({ children }: CardListProp) => {
-  return <div className="CardList">{children}</div>;
+  return <div className={styles.CardList}>{children}</div>;
 };

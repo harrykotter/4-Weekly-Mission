@@ -1,4 +1,4 @@
-import styles from "./AddLink.module.css";
+import styles from "@/styles/ui/AddLink.module.css";
 import { RefObject } from "react";
 
 const AddLink = ({
@@ -8,14 +8,23 @@ const AddLink = ({
   addLinkRef?: RefObject<HTMLDivElement>;
   isAddLinkFixed?: boolean;
 }) => {
-  const addLinkClass = isAddLinkFixed ? "AddLinkFixed" : "";
+  const addLinkClass = isAddLinkFixed
+    ? `${styles.AddLink} ${styles.AddLinkFixed}`
+    : styles.AddLink;
 
   return (
-    <div className={"AddLink " + addLinkClass} ref={addLinkRef}>
-      <div className="AddLink-items">
-        <input className="AddLink-input" placeholder="링크를 추가하세요" />
-        <img className="AddLink-icon" src="images/link.svg" alt="링크 아이콘" />
-        <button className="AddLink-button">추가하기</button>
+    <div className={addLinkClass} ref={addLinkRef}>
+      <div className={styles.AddLinkItems}>
+        <input
+          className={styles.AddLinkInput}
+          placeholder="링크를 추가하세요"
+        />
+        <img
+          className={styles.AddLinkIcon}
+          src="images/link.svg"
+          alt="링크 아이콘"
+        />
+        <button className={styles.AddLinkButton}>추가하기</button>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@
   }
 }
 
-.Footer-items {
+.FooterItems {
   display: grid;
   justify-content: space-between;
   grid-template:
@@ -32,14 +32,14 @@
   }
 }
 
-.Footer-copyright {
+.FooterCopyright {
   grid-area: copyright;
   color: #676767;
   font-family: Arial;
   font-size: 1.6rem;
 }
 
-.Footer-links {
+.FooterLinks {
   grid-area: footer-links;
   display: flex;
   column-gap: 3rem;
@@ -49,7 +49,7 @@
   font-size: 1.6rem;
 }
 
-.Footer-sns {
+.FooterSns {
   grid-area: sns;
   display: flex;
   column-gap: 1.2rem;

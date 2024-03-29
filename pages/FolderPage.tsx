@@ -9,7 +9,7 @@ import Category from "@/src/ui/Category/Category";
 import { EditLink } from "@/src/ui/EditLink/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
 
-import styles from "@/styles/FolderPage.module.css";
+import styles from "@/styles/pages/FolderPage.module.css";
 import {
   useState,
   useRef,
@@ -146,7 +146,7 @@ const FolderPage: React.FC = () => {
             ) : (
               <div className={styles.NoLink}>저장된 링크가 없습니다.</div>
             )}
-            <button className={styles.MobileAddButton}>폴더 추가하기 +</button>
+            <button className={styles.mobileAddButton}>폴더 추가하기 +</button>
             {isAddLinkFixed && <AddLink isAddLinkFixed={isAddLinkFixed} />}
           </div>
         </div>

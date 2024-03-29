@@ -4,7 +4,7 @@ import { CardList } from "@/src/ui/CardList/CardList";
 import Layout from "@/src/feature/Layout/Layout";
 import { Card } from "@/src/ui/Card/Card";
 import { useGetFolder } from "@/src/hooks/useGetFolder";
-import styles from "@/styles/SharedPage.module.css";
+import styles from "@/styles/pages/SharedPage.module.css";
 import { ChangeEventHandler, useState } from "react";
 
 const SharedPage = () => {

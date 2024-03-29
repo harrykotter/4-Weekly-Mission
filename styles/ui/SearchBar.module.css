@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.SearchBar-input {
+.SearchBarInput {
   width: 100%;
   max-width: 106rem;
   height: 4.3rem;
@@ -20,7 +20,7 @@
     line-height: 150%;
   }
 }
-.SearchBar-input::placeholder {
+.SearchBarInput::placeholder {
   color: var(--text-content-gray);
 }
 
