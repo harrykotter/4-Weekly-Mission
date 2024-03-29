@@ -21,8 +21,10 @@ const NavigationBar = ({ profile, isNavFixed }: NavProps) => {
       <div className={styles.NavigationBarItems}>
         <a href={ROUTE.랜딩}>
           <Image
+            width={133}
+            height={100}
             className={styles.NavigationBarLogo}
-            src="images/linkbrary.svg"
+            src="/assets/linkbrary.svg"
             alt="Linkbrary 서비스 로고"
           />
         </a>

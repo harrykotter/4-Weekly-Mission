@@ -27,8 +27,8 @@ export const Card = ({
 
   const isFolder = typeof favorite !== "undefined";
   const isFavorite = favorite
-    ? "images/full-star.svg"
-    : "images/empty-star.svg";
+    ? "/assets/full-star.svg"
+    : "/assets/empty-star.svg";
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,12 +54,18 @@ export const Card = ({
       <div className={styles.Card}>
         <div
           style={{
-            backgroundImage: `url(${imageSource ?? "images/card-default.png"})`,
+            backgroundImage: `url(${imageSource ?? "/assets/card-default.png"})`,
           }}
           className={styles.CardImage}
         >
           {favorite !== undefined && (
-            <Image className={styles.starButton} alt="star" src={isFavorite} />
+            <Image
+              width={34}
+              height={34}
+              className={styles.starButton}
+              alt="star"
+              src={isFavorite}
+            />
           )}
         </div>
         <div className={styles.CardContent}>
@@ -68,8 +74,10 @@ export const Card = ({
             {isFolder && (
               <button onClick={handleKebabClick}>
                 <Image
+                  width={20}
+                  height={20}
                   className={styles.kebab}
-                  src="images/kebab.png"
+                  src="/assets/kebab.png"
                   alt="menu"
                 />
               </button>

@@ -24,7 +24,9 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             rel="noopener noreferrer"
           >
             <Image
-              src="images/facebook.svg"
+              width={20}
+              height={20}
+              src="/assets/facebook.svg"
               alt="facebook 홈페이지로 연결된 facebook 로고"
             />
           </a>
@@ -34,7 +36,9 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             rel="noopener noreferrer"
           >
             <Image
-              src="images/twitter.svg"
+              width={20}
+              height={20}
+              src="/assets/twitter.svg"
               alt="twitter 홈페이지로 연결된 twitter 로고"
             />
           </a>
@@ -44,7 +48,9 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             rel="noopener noreferrer"
           >
             <Image
-              src="images/youtube.svg"
+              width={20}
+              height={20}
+              src="/assets/youtube.svg"
               alt="youtube 홈페이지로 연결된 youtube 로고"
             />
           </a>
@@ -54,7 +60,9 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             rel="noopener noreferrer"
           >
             <Image
-              src="images/instagram.svg"
+              width={20}
+              height={20}
+              src="/assets/instagram.svg"
               alt="instagram 홈페이지로 연결된 instagram 로고"
             />
           </a>

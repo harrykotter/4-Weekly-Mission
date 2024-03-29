@@ -19,7 +19,12 @@ export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
             onClick={handleEditClick}
             id="shareFolder"
           >
-            <Image src="images/share-icon.svg" alt="share icon" />
+            <Image
+              width={17}
+              height={17}
+              src="/assets/share-icon.svg"
+              alt="share icon"
+            />
             공유하기
           </button>
           <button
@@ -27,7 +32,12 @@ export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
             onClick={handleEditClick}
             id="changeFolderName"
           >
-            <Image src="images/pen-icon.svg" alt="rename icon" />
+            <Image
+              width={17}
+              height={17}
+              src="/assets/pen-icon.svg"
+              alt="rename icon"
+            />
             이름 변경
           </button>
           <button
@@ -35,7 +45,12 @@ export const EditLink = ({ currentCategory, handleEditClick }: Props) => {
             onClick={handleEditClick}
             id="deleteFolder"
           >
-            <Image src="images/trash-icon.svg" alt="delete icon" />
+            <Image
+              width={17}
+              height={17}
+              src="/assets/trash-icon.svg"
+              alt="delete icon"
+            />
             삭제
           </button>
         </div>

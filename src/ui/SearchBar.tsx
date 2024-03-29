@@ -23,11 +23,19 @@ const SearchBar: React.FC<Prop> = ({
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <Image src="images/search.svg" alt="검색" className={styles.lenzIcon} />
+        <Image
+          width={16}
+          height={16}
+          src="/assets/search.svg"
+          alt="검색"
+          className={styles.lenzIcon}
+        />
         <button onClick={handleInputClear}>
           {!!searchTerm && (
             <Image
-              src="images/search-clear.svg"
+              width={24}
+              height={24}
+              src="/assets/search-clear.svg"
               alt="지우기"
               className={styles.clearIcon}
             />

@@ -10,7 +10,7 @@ interface Props {
 const FolderInfo = ({ profileImage, ownerName, folderName }: Props) => {
   return (
     <div className={styles.FolderInfo}>
-      <Image
+      <img
         className={styles.FolderInfoProfile}
         src={profileImage}
         alt="폴더 소유자 프로필 이미지"

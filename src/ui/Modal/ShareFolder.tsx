@@ -24,7 +24,9 @@ function ShareFolder({
         <div className={styles.iconWrapper}>
           <button>
             <Image
-              src="images/kakaotalk-icon.svg"
+              width={30}
+              height={30}
+              src="/assets/kakaotalk-icon.svg"
               alt="카카오톡으로 공유하기"
               className={styles.icons}
             />
@@ -34,7 +36,9 @@ function ShareFolder({
         <div className={styles.iconWrapper}>
           <button onClick={onClickFacebook}>
             <Image
-              src="images/facebook-icon.svg"
+              width={30}
+              height={30}
+              src="/assets/facebook-icon.svg"
               alt="페이스북으로 공유하기"
               className={styles.icons}
             />
@@ -47,7 +51,9 @@ function ShareFolder({
             onCopy={() => alert("클립보드에 복사되었습니다")}
           >
             <Image
-              src="images/copylink-icon.svg"
+              width={30}
+              height={30}
+              src="/assets/copylink-icon.svg"
               alt="링크 복사"
               className={styles.icons}
             />

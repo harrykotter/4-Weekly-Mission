@@ -59,7 +59,12 @@ const Modal: React.FC<ModalProps> = ({
       <div className={styles.Modal} onClick={(e) => e.stopPropagation()}>
         {renderModalContent()}
         <button className={styles.closeButton} onClick={handleCloseClick}>
-          <Image src="images/close_button.svg" alt="닫힘 버튼" />
+          <Image
+            width={20}
+            height={20}
+            src="/assets/close_button.svg"
+            alt="닫힘 버튼"
+          />
         </button>
       </div>
     </div>

@@ -47,8 +47,10 @@ function AddToMyFolder({
             >{`${link?.link.count}개 링크`}</span>
             {selectedFolder === link.id && (
               <Image
+                width={14}
+                height={14}
                 className={styles.checkIcon}
-                src="images/check-icon.svg"
+                src="/assets/check-icon.svg"
                 alt="check icon"
               />
             )}

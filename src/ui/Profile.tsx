@@ -11,7 +11,7 @@ interface Prop {
 const Profile = ({ profile }: Prop) => {
   return (
     <div className={styles.Profile}>
-      <Image
+      <img
         className={styles.ProfileImage}
         src={profile.profileImageSource || ""}
         alt="프로필 이미지"
