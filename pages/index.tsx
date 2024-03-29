@@ -22,15 +22,8 @@ export default function Home() {
           name="viewport"
           content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        />
       </Head>
-      <body>
-        <div id="root"></div>
-      </body>
+      <div id="root"></div>
     </>
   );
 }

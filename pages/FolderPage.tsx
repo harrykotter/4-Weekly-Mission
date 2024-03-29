@@ -1,13 +1,13 @@
-import AddLink from "ui/AddLink/AddLink";
-import Layout from "feature/Layout/Layout";
-import SearchBar from "ui/SearchBar/SearchBar";
-import { CardList } from "ui/CardList/CardList";
-import { Card } from "ui/Card/Card";
-import { useGetLink } from "hooks/useGetLink";
-import { useGetFolderByLink } from "hooks/useGetFolderByLink";
-import Category from "ui/Category/Category";
-import { EditLink } from "ui/EditLink/EditLink";
-import Modal from "ui/Modal/Modal";
+import AddLink from "@/src/ui/AddLink/AddLink";
+import Layout from "@/src/feature/Layout/Layout";
+import SearchBar from "@/src/ui/SearchBar/SearchBar";
+import { CardList } from "@/src/ui/CardList/CardList";
+import { Card } from "@/src/ui/Card/Card";
+import { useGetLink } from "@/src/hooks/useGetLink";
+import { useGetFolderByLink } from "@/src/hooks/useGetFolderByLink";
+import Category from "@/src/ui/Category/Category";
+import { EditLink } from "@/src/ui/EditLink/EditLink";
+import Modal from "@/src/ui/Modal/Modal";
 
 import "./FolderPage.css";
 import {
@@ -18,7 +18,7 @@ import {
   MouseEventHandler,
 } from "react";
 
-export const FolderPage: React.FC = () => {
+const FolderPage: React.FC = () => {
   const [currentCategory, setCurrentCategory] = useState("전체");
   const [folderId, setFolderId] = useState("0");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,14 +47,14 @@ export const FolderPage: React.FC = () => {
     const category = eventTarget.innerText;
     const Id = eventTarget.getAttribute("data-id");
     setCurrentCategory(category);
-    setFolderId(Id);
+    setFolderId(Id || "");
   };
   const handleModalClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const eventTarget = e.target as HTMLElement;
     e.preventDefault();
     setIsModalOpen(true);
     setModal(e.currentTarget.id);
-    setCurrentUrl(eventTarget.getAttribute("data-url"));
+    setCurrentUrl(eventTarget.getAttribute("data-url") || "");
   };
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchTerm(e.target.value);
@@ -154,3 +154,5 @@ export const FolderPage: React.FC = () => {
     </>
   );
 };
+
+export default FolderPage;

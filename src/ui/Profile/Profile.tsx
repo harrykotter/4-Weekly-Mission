@@ -2,8 +2,8 @@ import "./Profile.css";
 
 interface Prop {
   profile: {
-    profileImageSource: string;
-    email: string;
+    profileImageSource?: string;
+    email?: string;
   };
 }
 

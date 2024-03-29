@@ -1,5 +1,5 @@
 import styles from "./Modal.module.css";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const currentUrl = "https://weekly-mission-week9.vercel.app/shared";
 const facebookShareLink = "http://www.facebook.com/sharer.php?u=";

@@ -4,10 +4,10 @@ import Profile from "../../ui/Profile/Profile";
 import "./NavigationBar.css";
 
 interface NavProps {
-  isNavFixed: boolean;
-  profile: {
-    profileImageSource: string;
-    email: string;
+  isNavFixed?: boolean;
+  profile?: {
+    profileImageSource?: string;
+    email?: string;
   };
 }
 

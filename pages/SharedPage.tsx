@@ -1,13 +1,13 @@
-import FolderInfo from "ui/FolderInfo/FolderInfo";
-import SearchBar from "ui/SearchBar/SearchBar";
-import { CardList } from "ui/CardList/CardList";
-import Layout from "feature/Layout/Layout";
-import { Card } from "ui/Card/Card";
-import { useGetFolder } from "hooks/useGetFolder";
+import FolderInfo from "@/src/ui/FolderInfo/FolderInfo";
+import SearchBar from "@/src/ui/SearchBar/SearchBar";
+import { CardList } from "@/src/ui/CardList/CardList";
+import Layout from "@/src/feature/Layout/Layout";
+import { Card } from "@/src/ui/Card/Card";
+import { useGetFolder } from "@/src/hooks/useGetFolder";
 import "./SharedPage.css";
 import { ChangeEventHandler, useState } from "react";
 
-export const SharedPage = () => {
+const SharedPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data } = useGetFolder();
@@ -51,3 +51,5 @@ export const SharedPage = () => {
     </Layout>
   );
 };
+
+export default SharedPage;

@@ -1,9 +1,9 @@
-import { ROUTE } from "util/constant";
+import { ROUTE } from "@/src/util/constant";
 import "./Footer.css";
 import TEXT from "./constant";
 import { RefObject } from "react";
 
-const Footer = ({ footerRef }: { footerRef: RefObject<HTMLDivElement> }) => {
+const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
   return (
     <footer className="Footer" ref={footerRef}>
       <div className="Footer-items">
