@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from "react";
 import styles from "@/styles/ui/SearchBar.module.css";
+import Image from "next/image";
 
 interface Prop {
   handleInputChange: ChangeEventHandler<HTMLInputElement>;
@@ -22,10 +23,10 @@ const SearchBar: React.FC<Prop> = ({
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <img src="images/search.svg" alt="검색" className={styles.lenzIcon} />
+        <Image src="images/search.svg" alt="검색" className={styles.lenzIcon} />
         <button onClick={handleInputClear}>
           {!!searchTerm && (
-            <img
+            <Image
               src="images/search-clear.svg"
               alt="지우기"
               className={styles.clearIcon}

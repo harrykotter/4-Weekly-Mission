@@ -1,4 +1,5 @@
 import styles from "@/styles/ui/Modal.module.css";
+import Image from "next/image";
 import { MouseEventHandler, useState } from "react";
 
 interface Link {
@@ -45,7 +46,7 @@ function AddToMyFolder({
               className={styles.folderButtonLinks}
             >{`${link?.link.count}개 링크`}</span>
             {selectedFolder === link.id && (
-              <img
+              <Image
                 className={styles.checkIcon}
                 src="images/check-icon.svg"
                 alt="check icon"

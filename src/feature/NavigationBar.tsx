@@ -2,6 +2,7 @@ import { ROUTE } from "../util/constant";
 import Cta from "../ui/Cta";
 import Profile from "../ui/Profile";
 import styles from "@/styles/feature/NavigationBar.module.css";
+import Image from "next/image";
 
 interface NavProps {
   isNavFixed?: boolean;
@@ -19,7 +20,7 @@ const NavigationBar = ({ profile, isNavFixed }: NavProps) => {
     <nav className={NavBar}>
       <div className={styles.NavigationBarItems}>
         <a href={ROUTE.랜딩}>
-          <img
+          <Image
             className={styles.NavigationBarLogo}
             src="images/linkbrary.svg"
             alt="Linkbrary 서비스 로고"

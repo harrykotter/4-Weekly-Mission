@@ -5,6 +5,7 @@ import DeleteLink from "./DeleteLink";
 import ShareFolder from "./ShareFolder";
 import DeleteFolder from "./DeleteFolder";
 import AddFolder from "./AddFolder";
+import Image from "next/image";
 
 interface ModalProps {
   categoryData: any;
@@ -58,7 +59,7 @@ const Modal: React.FC<ModalProps> = ({
       <div className={styles.Modal} onClick={(e) => e.stopPropagation()}>
         {renderModalContent()}
         <button className={styles.closeButton} onClick={handleCloseClick}>
-          <img src="images/close_button.svg" alt="닫힘 버튼" />
+          <Image src="images/close_button.svg" alt="닫힘 버튼" />
         </button>
       </div>
     </div>

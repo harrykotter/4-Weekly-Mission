@@ -1,4 +1,5 @@
 import styles from "@/styles/ui/Modal.module.css";
+import Image from "next/image";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const currentUrl = "https://weekly-mission-week9.vercel.app/shared";
@@ -22,7 +23,7 @@ function ShareFolder({
       <div className={styles.shareIcons}>
         <div className={styles.iconWrapper}>
           <button>
-            <img
+            <Image
               src="images/kakaotalk-icon.svg"
               alt="카카오톡으로 공유하기"
               className={styles.icons}
@@ -32,7 +33,7 @@ function ShareFolder({
         </div>
         <div className={styles.iconWrapper}>
           <button onClick={onClickFacebook}>
-            <img
+            <Image
               src="images/facebook-icon.svg"
               alt="페이스북으로 공유하기"
               className={styles.icons}
@@ -45,7 +46,7 @@ function ShareFolder({
             text={`${currentUrl}${selectedId}`}
             onCopy={() => alert("클립보드에 복사되었습니다")}
           >
-            <img
+            <Image
               src="images/copylink-icon.svg"
               alt="링크 복사"
               className={styles.icons}

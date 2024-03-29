@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, MouseEventHandler } from "react";
 import styles from "@/styles/ui/Card.module.css";
+import Image from "next/image";
 
 interface Prop {
   url: string;
@@ -58,7 +59,7 @@ export const Card = ({
           className={styles.CardImage}
         >
           {favorite !== undefined && (
-            <img className={styles.starButton} alt="star" src={isFavorite} />
+            <Image className={styles.starButton} alt="star" src={isFavorite} />
           )}
         </div>
         <div className={styles.CardContent}>
@@ -66,7 +67,7 @@ export const Card = ({
             <span className={styles.CardContentElapsedTime}>{elapsedTime}</span>
             {isFolder && (
               <button onClick={handleKebabClick}>
-                <img
+                <Image
                   className={styles.kebab}
                   src="images/kebab.png"
                   alt="menu"

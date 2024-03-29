@@ -1,4 +1,5 @@
 import styles from "@/styles/ui/FolderInfo.module.css";
+import Image from "next/image";
 
 interface Props {
   profileImage: string;
@@ -9,7 +10,7 @@ interface Props {
 const FolderInfo = ({ profileImage, ownerName, folderName }: Props) => {
   return (
     <div className={styles.FolderInfo}>
-      <img
+      <Image
         className={styles.FolderInfoProfile}
         src={profileImage}
         alt="폴더 소유자 프로필 이미지"

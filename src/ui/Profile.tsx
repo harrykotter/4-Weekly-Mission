@@ -1,4 +1,5 @@
 import styles from "@/styles/ui/Profile.module.css";
+import Image from "next/image";
 
 interface Prop {
   profile: {
@@ -10,9 +11,9 @@ interface Prop {
 const Profile = ({ profile }: Prop) => {
   return (
     <div className={styles.Profile}>
-      <img
+      <Image
         className={styles.ProfileImage}
-        src={profile.profileImageSource}
+        src={profile.profileImageSource || ""}
         alt="프로필 이미지"
       />
       <span className={styles.ProfileEmail}>{profile.email}</span>

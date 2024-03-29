@@ -1,4 +1,5 @@
 import styles from "@/styles/ui/AddLink.module.css";
+import Image from "next/image";
 import { RefObject } from "react";
 
 const AddLink = ({
@@ -19,7 +20,7 @@ const AddLink = ({
           className={styles.AddLinkInput}
           placeholder="링크를 추가하세요"
         />
-        <img
+        <Image
           className={styles.AddLinkIcon}
           src="images/link.svg"
           alt="링크 아이콘"

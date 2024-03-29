@@ -2,6 +2,7 @@ import { ROUTE } from "@/src/util/constant";
 import styles from "@/styles/feature/Footer.module.css";
 import TEXT from "./constant";
 import { RefObject } from "react";
+import Image from "next/image";
 
 const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
   return (
@@ -22,7 +23,7 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="images/facebook.svg"
               alt="facebook 홈페이지로 연결된 facebook 로고"
             />
@@ -32,7 +33,7 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="images/twitter.svg"
               alt="twitter 홈페이지로 연결된 twitter 로고"
             />
@@ -42,7 +43,7 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="images/youtube.svg"
               alt="youtube 홈페이지로 연결된 youtube 로고"
             />
@@ -52,7 +53,7 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src="images/instagram.svg"
               alt="instagram 홈페이지로 연결된 instagram 로고"
             />
