@@ -1,6 +1,6 @@
-import { ROUTE } from "../../util/constant";
-import Cta from "../../ui/Cta/Cta";
-import Profile from "../../ui/Profile/Profile";
+import { ROUTE } from "../util/constant";
+import Cta from "../ui/Cta";
+import Profile from "../ui/Profile";
 import styles from "@/styles/feature/NavigationBar.module.css";
 
 interface NavProps {

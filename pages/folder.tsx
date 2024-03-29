@@ -1,12 +1,12 @@
-import AddLink from "@/src/ui/AddLink/AddLink";
-import Layout from "@/src/feature/Layout/Layout";
-import SearchBar from "@/src/ui/SearchBar/SearchBar";
-import { CardList } from "@/src/ui/CardList/CardList";
-import { Card } from "@/src/ui/Card/Card";
+import AddLink from "@/src/ui/AddLink";
+import Layout from "@/src/feature/Layout";
+import SearchBar from "@/src/ui/SearchBar";
+import { CardList } from "@/src/ui/CardList";
+import { Card } from "@/src/ui/Card";
 import { useGetLink } from "@/src/hooks/useGetLink";
 import { useGetFolderByLink } from "@/src/hooks/useGetFolderByLink";
-import Category from "@/src/ui/Category/Category";
-import { EditLink } from "@/src/ui/EditLink/EditLink";
+import Category from "@/src/ui/Category";
+import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
 
 import styles from "@/styles/pages/FolderPage.module.css";

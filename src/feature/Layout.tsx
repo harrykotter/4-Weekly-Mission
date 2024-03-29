@@ -1,6 +1,6 @@
 import { useGetUser } from "@/src/hooks/useGetUser";
-import Footer from "../Footer/Footer";
-import NavigationBar from "../NavigationBar/NavigationBar";
+import Footer from "./Footer/Footer";
+import NavigationBar from "./NavigationBar";
 import { ReactNode, RefObject } from "react";
 
 interface layoutProps {

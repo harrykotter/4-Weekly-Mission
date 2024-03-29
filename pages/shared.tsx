@@ -1,8 +1,8 @@
-import FolderInfo from "@/src/ui/FolderInfo/FolderInfo";
-import SearchBar from "@/src/ui/SearchBar/SearchBar";
-import { CardList } from "@/src/ui/CardList/CardList";
-import Layout from "@/src/feature/Layout/Layout";
-import { Card } from "@/src/ui/Card/Card";
+import FolderInfo from "@/src/ui/FolderInfo";
+import SearchBar from "@/src/ui/SearchBar";
+import { CardList } from "@/src/ui/CardList";
+import Layout from "@/src/feature/Layout";
+import { Card } from "@/src/ui/Card";
 import { useGetFolder } from "@/src/hooks/useGetFolder";
 import styles from "@/styles/pages/SharedPage.module.css";
 import { ChangeEventHandler, useState } from "react";
