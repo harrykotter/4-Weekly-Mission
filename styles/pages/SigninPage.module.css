@@ -1,0 +1,17 @@
+.SignPage {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--light-blue);
+}
+
+.InputForm {
+  margin: auto;
+  padding: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  max-width: 35rem;
+  gap: 3.2rem;
+}

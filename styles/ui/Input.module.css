@@ -1,0 +1,40 @@
+.InputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.6rem;
+}
+
+.Input {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.inputStyles {
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--gray20);
+  padding: 1.8rem 1.5rem;
+  background-color: white;
+  font-size: 1.6rem;
+  font-weight: 400;
+  width: 100%;
+}
+
+.inputStyles:focus {
+  border: 0.1rem solid var(--primary);
+}
+.inputStyles.inputError {
+  border: 0.1rem solid var(--red);
+}
+
+.eyecon {
+  position: absolute;
+  top: 33%;
+  right: 5%;
+}
+
+.errorText {
+  font-size: 1.4rem;
+  color: var(--red);
+}

@@ -1,3 +1,7 @@
+interface StringObj {
+  [key: string]: string;
+}
+
 export const ROUTE: {
   [key: string]: string;
 } = {
@@ -26,3 +30,7 @@ export const TIME_IN_MILLISECONDS: {
 };
 
 export const DEFAULT_PROFILE: string = "/images/profile-default.svg";
+
+export const ERROR_MESSAGE: StringObj = {
+  wrongInput: "내용을 다시 입력해주세요.",
+};
