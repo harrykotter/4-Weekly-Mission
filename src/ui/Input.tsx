@@ -1,47 +1,29 @@
 import Image from "next/image";
-import {
-  Dispatch,
-  FocusEventHandler,
-  MouseEventHandler,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/ui/Input.module.css";
-import { ERROR_MESSAGE } from "@/src/util/constant";
 
 interface Prop {
   placeholder: string;
   type: string;
+  handleFocusout: any;
+  inputError: string;
   isEyeOpen?: boolean;
-  setIsEyeOpen?: Dispatch<SetStateAction<boolean>>;
-  // handleFocusout: any;
-  // inputError: string | null;
+  handleEyeconClick?: any;
 }
 
 const Input = ({
   placeholder,
   type,
   isEyeOpen,
-  setIsEyeOpen,
-  // handleFocusout,
-  // inputError,
+  handleFocusout,
+  inputError,
+  handleEyeconClick,
 }: Prop) => {
-  const [inputError, setInputError] = useState<string | null>(null);
-
-  const handleFocusout: FocusEventHandler<HTMLInputElement> = (e) => {
-    const eventTarget = e.target;
-    if (eventTarget.value?.trim() === "") {
-      setInputError(ERROR_MESSAGE.wrongInput);
-    } else setInputError(null);
-  };
-  const handleEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
-    if (setIsEyeOpen) setIsEyeOpen(!isEyeOpen);
-  };
   const eyecon = isEyeOpen ? "/assets/eye-on.svg" : "/assets/eye-off.svg";
   const inputStyle =
-    inputError !== null
-      ? `${styles.inputStyles} ${styles.inputError}`
-      : styles.inputStyles;
+    inputError === ""
+      ? styles.inputStyles
+      : `${styles.inputStyles} ${styles.inputError}`;
 
   return (
     <div className={styles.InputWrapper}>
