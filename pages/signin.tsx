@@ -2,6 +2,8 @@ import Input from "@/src/ui/Input";
 import styles from "@/styles/pages/SigninPage.module.css";
 import { FocusEventHandler, MouseEventHandler, useState } from "react";
 import { ERROR_MESSAGE } from "@/src/util/constant";
+import Head from "next/head";
+import Link from "next/link";
 
 const Signin = () => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
@@ -26,24 +28,32 @@ const Signin = () => {
     setIsEyeOpen(!isEyeOpen);
   };
   return (
-    <form className={styles.SignPage}>
-      <div className={styles.InputForm}>
-        <Input
-          type="email"
-          placeholder="이메일"
-          handleFocusout={handleEmailFocusout}
-          inputError={errorEmail}
-        />
-        <Input
-          type={isEyeOpen ? "email" : "password"}
-          placeholder="비밀번호"
-          isEyeOpen={isEyeOpen}
-          inputError={errorPassword}
-          handleFocusout={handlePasswordFocusout}
-          handleEyeconClick={handleEyeconClick}
-        />
-      </div>
-    </form>
+    <>
+      <Head>
+        <title>Sign In</title>
+      </Head>
+      <form className={styles.SignPage}>
+        <div className={styles.InputForm}>
+          <Link href="/" className={styles.Home}>
+            홈으로
+          </Link>
+          <Input
+            type="email"
+            placeholder="이메일"
+            handleFocusout={handleEmailFocusout}
+            inputError={errorEmail}
+          />
+          <Input
+            type={isEyeOpen ? "email" : "password"}
+            placeholder="비밀번호"
+            isEyeOpen={isEyeOpen}
+            inputError={errorPassword}
+            handleFocusout={handlePasswordFocusout}
+            handleEyeconClick={handleEyeconClick}
+          />
+        </div>
+      </form>
+    </>
   );
 };
 

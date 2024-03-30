@@ -1,8 +1,8 @@
-import { ROUTE } from "../util/constant";
 import Cta from "../ui/Cta";
 import Profile from "../ui/Profile";
 import styles from "@/styles/feature/NavigationBar.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 interface NavProps {
   isNavFixed?: boolean;
@@ -19,7 +19,7 @@ const NavigationBar = ({ profile, isNavFixed }: NavProps) => {
   return (
     <nav className={NavBar}>
       <div className={styles.NavigationBarItems}>
-        <a href={ROUTE.랜딩}>
+        <Link href="/">
           <Image
             width={133}
             height={100}
@@ -27,15 +27,15 @@ const NavigationBar = ({ profile, isNavFixed }: NavProps) => {
             src="/assets/linkbrary.svg"
             alt="Linkbrary 서비스 로고"
           />
-        </a>
+        </Link>
         {profile ? (
           <Profile profile={profile} />
         ) : (
-          <a href={ROUTE.로그인}>
+          <Link href="/signin">
             <Cta>
               <span className={styles.NavigationBarSignin}>로그인</span>
             </Cta>
-          </a>
+          </Link>
         )}
       </div>
     </nav>

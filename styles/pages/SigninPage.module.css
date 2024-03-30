@@ -15,3 +15,14 @@
   max-width: 35rem;
   gap: 3.2rem;
 }
+
+.Home {
+  width: 12rem;
+  padding: 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  font-size: 1.6rem;
+  text-align: center;
+}

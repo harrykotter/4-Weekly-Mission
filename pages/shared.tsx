@@ -6,6 +6,7 @@ import { Card } from "@/src/ui/Card";
 import { useGetFolder } from "@/src/hooks/useGetFolder";
 import styles from "@/styles/pages/SharedPage.module.css";
 import { ChangeEventHandler, useState } from "react";
+import Head from "next/head";
 
 const SharedPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,25 +31,30 @@ const SharedPage = () => {
   );
 
   return (
-    <Layout>
-      <div className={styles.SharedPage}>
-        <FolderInfo
-          profileImage={profileImage}
-          ownerName={ownerName}
-          folderName={folderName}
-        />
-        <div className={styles.SharedPageItems}>
-          <SearchBar
-            handleInputChange={handleInputChange}
-            handleInputClear={handleInputClear}
-            searchTerm={searchTerm}
+    <>
+      <Head>
+        <title>Shared</title>
+      </Head>
+      <Layout>
+        <div className={styles.SharedPage}>
+          <FolderInfo
+            profileImage={profileImage}
+            ownerName={ownerName}
+            folderName={folderName}
           />
-          <CardList>
-            {filteredLinks?.map((link) => <Card key={link?.id} {...link} />)}
-          </CardList>
+          <div className={styles.SharedPageItems}>
+            <SearchBar
+              handleInputChange={handleInputChange}
+              handleInputClear={handleInputClear}
+              searchTerm={searchTerm}
+            />
+            <CardList>
+              {filteredLinks?.map((link) => <Card key={link?.id} {...link} />)}
+            </CardList>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

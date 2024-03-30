@@ -17,6 +17,7 @@ import {
   ChangeEventHandler,
   MouseEventHandler,
 } from "react";
+import Head from "next/head";
 
 const FolderPage: React.FC = () => {
   const [currentCategory, setCurrentCategory] = useState("전체");
@@ -104,6 +105,9 @@ const FolderPage: React.FC = () => {
 
   return (
     <>
+      <Head>
+        <title>Folder</title>
+      </Head>
       {isModalOpen && (
         <Modal
           currentCategory={currentCategory}

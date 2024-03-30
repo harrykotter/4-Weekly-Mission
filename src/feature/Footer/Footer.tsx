@@ -1,4 +1,3 @@
-import { ROUTE } from "@/src/util/constant";
 import styles from "@/styles/feature/Footer.module.css";
 import TEXT from "./constant";
 import { RefObject } from "react";
@@ -10,10 +9,10 @@ const Footer = ({ footerRef }: { footerRef?: RefObject<HTMLDivElement> }) => {
       <div className={styles.FooterItems}>
         <span className={styles.FooterCopyright}>{TEXT.codeit}</span>
         <div className={styles.FooterLinks}>
-          <a className={styles.FooterLink} href={ROUTE.개인정보처리방침}>
+          <a className={styles.FooterLink} href="privacy">
             {TEXT.privacyPolicy}
           </a>
-          <a className={styles.FooterLink} href={ROUTE.FAQ}>
+          <a className={styles.FooterLink} href="/faq">
             {TEXT.faq}
           </a>
         </div>

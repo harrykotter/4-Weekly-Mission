@@ -2,15 +2,6 @@ interface StringObj {
   [key: string]: string;
 }
 
-export const ROUTE: {
-  [key: string]: string;
-} = {
-  랜딩: "/",
-  로그인: "/signin",
-  개인정보처리방침: "/privacy",
-  FAQ: "/faq",
-};
-
 const second: number = 1000;
 const minute: number = second * 60;
 const hour: number = minute * 60;
