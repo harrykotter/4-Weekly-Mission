@@ -1,22 +1,28 @@
-import Input from "@/src/ui/Input";
+import InputLayout from "@/src/ui/InputLayout";
 import styles from "@/styles/pages/SigninPage.module.css";
 import { FocusEventHandler, MouseEventHandler, useState } from "react";
 import { ERROR_MESSAGE } from "@/src/util/constant";
+import { useForm } from "react-hook-form";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+
+interface FormValue {
+  email: string;
+  password: string;
+}
 
 const Signin = () => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPassword, setErrorPassword] = useState<string>("");
 
-  const handleEmailFocusout: FocusEventHandler<HTMLInputElement> = (e) => {
-    const eventTarget = e.target;
-    if (eventTarget.value?.trim() === "") {
-      setErrorEmail(ERROR_MESSAGE.wrongInput);
-    } else setErrorEmail("");
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<FormValue>({ mode: "onBlur" });
 
   const handlePasswordFocusout: FocusEventHandler<HTMLInputElement> = (e) => {
     const eventTarget = e.target;
@@ -35,36 +41,60 @@ const Signin = () => {
       </Head>
       <div className={styles.SignPage}>
         <div className={styles.FormWrapper}>
-        <div className={styles.SigninHeader}>
-        <Link href="/">
-          <Image
-            width={210}
-            height={40}
-            src="/assets/linkbrary.svg"
-            alt="Linkbrary 서비스 로고"
-          />
-        </Link>
-        <div className={styles.SignMsg}>회원이 아니신가요? <Link href="/signup">회원 가입하기</Link></div>
-       </div>
-       <form className={styles.InputForm}>
-          <Input
-          title="이메일"
-            type="email"
-            placeholder="이메일을 입력해주세요"
-            handleFocusout={handleEmailFocusout}
-            inputError={errorEmail}
-          />
-          <Input
-          title="비밀번호"
-            type={isEyeOpen ? "email" : "password"}
-            placeholder="비밀번호를 입력해주세요"
-            isEyeOpen={isEyeOpen}
-            inputError={errorPassword}
-            handleFocusout={handlePasswordFocusout}
-            handleEyeconClick={handleEyeconClick}
-          />
-      </form>
-      </div>
+          <div className={styles.SigninHeader}>
+            <Link href='/'>
+              <Image
+                width={210}
+                height={40}
+                src='/assets/linkbrary.svg'
+                alt='Linkbrary 서비스 로고'
+              />
+            </Link>
+            <div className={styles.SignMsg}>
+              회원이 아니신가요? <Link href='/signup'>회원 가입하기</Link>
+            </div>
+          </div>
+          <form className={styles.InputForm}>
+            <InputLayout inputError={errors.email?.message}>
+              <label htmlFor='email'>이메일</label>
+              <input
+                id='email'
+                type='email'
+                placeholder='이메일을 입력해주세요'
+                className={
+                  !errors.email?.message
+                    ? styles.inputStyles
+                    : `${styles.inputStyles} ${styles.inputError}`
+                }
+                {...register("email", {
+                  required: "이메일을 입력해주세요",
+                  pattern: {
+                    value:
+                      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                    message: "올바른 이메일 주소가 아닙니다.",
+                  },
+                })}
+              ></input>
+            </InputLayout>
+            <InputLayout
+              isEyeOpen={isEyeOpen}
+              inputError={errorPassword}
+              handleEyeconClick={handleEyeconClick}
+            >
+              <label htmlFor='password'>비밀번호</label>
+              <input
+                id='password'
+                type={isEyeOpen ? "email" : "password"}
+                placeholder='비밀번호를 입력해주세요'
+                className={
+                  !errors.password?.message
+                    ? styles.inputStyles
+                    : `${styles.inputStyles} ${styles.inputError}`
+                }
+              ></input>
+            </InputLayout>
+          </form>
+        </div>
       </div>
     </>
   );

@@ -4,7 +4,7 @@
   background-color: var(--light-blue);
 }
 
-.FormWrapper{
+.FormWrapper {
   margin: auto;
   padding: 3.2rem;
   padding-top: 20%;
@@ -15,14 +15,14 @@
   gap: 2rem;
 }
 
-.SigninHeader{
+.SigninHeader {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 1.6rem;
 }
 
-.SignMsg{
+.SignMsg {
   text-align: center;
   font-size: 1.6rem;
   font-weight: 400;
@@ -40,6 +40,22 @@
   max-width: 40rem;
   width: 100%;
   gap: 3.2rem;
+}
+
+.inputStyles {
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--gray20);
+  padding: 1.8rem 1.5rem;
+  background-color: white;
+  font-size: 1.6rem;
+  width: 100%;
+}
+
+.inputStyles:focus {
+  border: 0.1rem solid var(--primary);
+}
+.inputStyles.inputError {
+  border: 0.1rem solid var(--red);
 }
 
 .Home {
