@@ -14,7 +14,6 @@ interface FormValue {
 
 const Signin = () => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
-  const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPassword, setErrorPassword] = useState<string>("");
 
   const {
@@ -78,7 +77,7 @@ const Signin = () => {
             </InputLayout>
             <InputLayout
               isEyeOpen={isEyeOpen}
-              inputError={errorPassword}
+              inputError={errors.password?.message}
               handleEyeconClick={handleEyeconClick}
             >
               <label htmlFor='password'>비밀번호</label>
@@ -91,6 +90,9 @@ const Signin = () => {
                     ? styles.inputStyles
                     : `${styles.inputStyles} ${styles.inputError}`
                 }
+                {...register("password", {
+                  required: "비밀번호를 입력해주세요.",
+                })}
               ></input>
             </InputLayout>
           </form>

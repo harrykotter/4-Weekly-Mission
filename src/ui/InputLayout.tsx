@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "@/styles/ui/Input.module.css";
+import styles from "@/styles/ui/InputLayout.module.css";
 import { ReactNode } from "react";
 
 interface Prop {
