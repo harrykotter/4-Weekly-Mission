@@ -49,6 +49,9 @@ export const Card = ({
     setKebabOpen(true);
   };
 
+  // TODO
+  // a 태그 내부 스타일 div 제거 고려
+
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
       <div className={styles.Card}>

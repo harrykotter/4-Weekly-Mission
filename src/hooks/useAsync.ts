@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 type AsyncFunction = () => Promise<any>;
 
+// TODO
+// useAsync함수에 제네릭 부여하기
+
 export const useAsync = (asyncFunction: AsyncFunction, [deps]: any = []) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);

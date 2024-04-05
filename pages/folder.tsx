@@ -46,7 +46,7 @@ const FolderPage: React.FC = () => {
   const handleCategoryClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const eventTarget = e.target as HTMLElement;
     const category = eventTarget.innerText;
-    const Id = eventTarget.getAttribute("data-id");
+    const Id = eventTarget.id;
     setCurrentCategory(category);
     setFolderId(Id || "");
   };
@@ -68,6 +68,7 @@ const FolderPage: React.FC = () => {
     const addLinkObserver = new IntersectionObserver(
       ([entry]) => {
         setIsAddLinkShown(entry.isIntersecting);
+
       },
       { threshold: 0 },
     );
@@ -130,7 +131,7 @@ const FolderPage: React.FC = () => {
             <Category
               buttonClicked={handleCategoryClick}
               linkData={linkDataWithAll}
-              currentCategory={currentCategory}
+              categoryId={folderId}
               handleModalClick={handleModalClick}
             />
             <EditLink

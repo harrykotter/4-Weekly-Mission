@@ -4,14 +4,14 @@ import styles from "@/styles/ui/Category.module.css";
 interface Prop {
   buttonClicked: MouseEventHandler<HTMLButtonElement>;
   linkData: any;
-  currentCategory: string;
+  categoryId: string;
   handleModalClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const Category = ({
   buttonClicked,
   linkData,
-  currentCategory,
+  categoryId,
   handleModalClick,
 }: Prop) => {
   return (
@@ -20,13 +20,13 @@ const Category = ({
         {linkData?.map((folder: any) => (
           <button
             className={
-              folder.name === currentCategory
+              folder.id.toString() === categoryId
                 ? `${styles.CategoryButton} ${styles.buttonClicked}`
                 : styles.CategoryButton
             }
             key={folder?.id}
             onClick={buttonClicked}
-            data-id={folder?.id}
+            id={folder?.id}
           >
             {folder?.name}
           </button>
