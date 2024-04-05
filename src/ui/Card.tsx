@@ -48,13 +48,8 @@ export const Card = ({
     e.preventDefault();
     setKebabOpen(true);
   };
-
-  // TODO
-  // a 태그 내부 스타일 div 제거 고려
-
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      <div className={styles.Card}>
+    <a href={url} target="_blank" rel="noopener noreferrer" className={styles.Card}>
         <div
           style={{
             backgroundImage: `url(${imageSource ?? "/assets/card-default.png"})`,
@@ -108,7 +103,6 @@ export const Card = ({
           <p className={styles.CardContentDescription}>{description}</p>
           <span className={styles.CardContentCreatedAt}>{createdAt}</span>
         </div>
-      </div>
     </a>
   );
 };
