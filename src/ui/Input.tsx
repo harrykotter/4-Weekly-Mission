@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/ui/Input.module.css";
 
 interface Prop {
+  title: string;
   placeholder: string;
   type: string;
   handleFocusout: any;
@@ -12,6 +13,7 @@ interface Prop {
 }
 
 const Input = ({
+  title,
   placeholder,
   type,
   isEyeOpen,
@@ -27,7 +29,7 @@ const Input = ({
 
   return (
     <div className={styles.InputWrapper}>
-      <label htmlFor={type}>{placeholder}</label>
+      <label htmlFor={type}>{title}</label>
       <div className={styles.Input}>
         <input
           id={type}

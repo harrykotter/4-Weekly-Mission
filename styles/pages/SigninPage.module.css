@@ -4,15 +4,41 @@
   background-color: var(--light-blue);
 }
 
-.InputForm {
+.FormWrapper{
   margin: auto;
   padding: 3.2rem;
+  padding-top: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 2rem;
+}
+
+.SigninHeader{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.SignMsg{
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.SignMsg a {
+  color: var(--primary);
+}
+
+.InputForm {
+  display: flex;
+  gap: 3.2rem;
+  flex-direction: column;
   height: 100%;
-  max-width: 35rem;
+  max-width: 40rem;
+  width: 100%;
   gap: 3.2rem;
 }
 

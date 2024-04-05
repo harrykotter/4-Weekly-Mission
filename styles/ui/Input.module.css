@@ -1,8 +1,11 @@
 .InputWrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
-  gap: 0.6rem;
+  font-weight: 400;
+  font-size: 1.4rem;
+  gap: 1.2rem;
 }
 
 .Input {
@@ -17,7 +20,6 @@
   padding: 1.8rem 1.5rem;
   background-color: white;
   font-size: 1.6rem;
-  font-weight: 400;
   width: 100%;
 }
 
@@ -35,6 +37,8 @@
 }
 
 .errorText {
+  position: absolute;
+  bottom: -2.2rem;
   font-size: 1.4rem;
   color: var(--red);
 }
