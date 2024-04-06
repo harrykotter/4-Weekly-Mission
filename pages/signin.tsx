@@ -1,6 +1,6 @@
 import styles from "@/styles/pages/SigninPage.module.css";
 import { MouseEventHandler, useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -25,6 +25,9 @@ const Signin = () => {
   const handleEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
   };
+
+  const onSubmit: SubmitHandler<FormValue> = (data) => console.log(data);
+
   return (
     <>
       <Head>
@@ -45,7 +48,7 @@ const Signin = () => {
               회원이 아니신가요? <Link href='/signup'>회원 가입하기</Link>
             </div>
           </div>
-          <form className={styles.InputForm}>
+          <form className={styles.InputForm} onSubmit={handleSubmit(onSubmit)}>
             <EmailInput register={register} inputError={errors.email?.message} />
             <PasswordInput
               register={register}
@@ -53,6 +56,9 @@ const Signin = () => {
               isPasswordOpen={isPasswordOpen}
               handleEyeconClick={handleEyeconClick}
             />
+            <button className={styles.SubmitButton} type='submit'>
+              로그인
+            </button>
           </form>
         </div>
       </div>
