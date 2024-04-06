@@ -6,23 +6,32 @@ import Link from "next/link";
 import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
+import PasswordConfirmInput from "@/src/ui/PasswordConfirmInput";
 
 interface FormValue {
   email: string;
   password: string;
+  passwordConfirm?: string;
 }
 
 const Signup: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
+  const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<FormValue>({ mode: "onBlur" });
 
-  const handleEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
+const passwordValue = getValues('password');
+
+  const handlePasswordEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
+  };
+  const handlePasswordConfirmEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
+    setIsPasswordConfirmOpen(!isPasswordConfirmOpen);
   };
 
   const onSubmit: SubmitHandler<FormValue> = (data) => {
@@ -32,7 +41,7 @@ const Signup: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Sign In</title>
+        <title>Sign Up</title>
       </Head>
       <div className={styles.SignPage}>
         <div className={styles.FormWrapper}>
@@ -55,8 +64,14 @@ const Signup: React.FC = () => {
               register={register}
               inputError={errors.password?.message}
               isPasswordOpen={isPasswordOpen}
-              handleEyeconClick={handleEyeconClick}
+              handleEyeconClick={handlePasswordEyeconClick}
             />
+            <PasswordConfirmInput
+            register={register}
+              inputError={errors.passwordConfirm?.message}
+              isPasswordOpen={isPasswordConfirmOpen}
+              passwordValue={passwordValue}
+              handleEyeconClick={handlePasswordConfirmEyeconClick}/>
             <button className={styles.SubmitButton} type='submit'>
               회원 가입하기
             </button>

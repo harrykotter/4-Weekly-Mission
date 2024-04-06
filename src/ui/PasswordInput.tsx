@@ -24,7 +24,7 @@ const PasswordInput = ({ register, inputError, isPasswordOpen, handleEyeconClick
       <label htmlFor='password'>비밀번호</label>
       <input
         id='password'
-        type={isPasswordOpen ? "email" : "password"}
+        type={isPasswordOpen ? "text" : "password"}
         placeholder='비밀번호를 입력해주세요'
         className={!inputError ? styles.inputStyles : `${styles.inputStyles} ${styles.inputError}`}
         {...register("password", {
