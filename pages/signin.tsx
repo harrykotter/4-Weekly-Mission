@@ -6,27 +6,41 @@ import Link from "next/link";
 import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
+import useAsyncCallback from "@/src/hooks/useAsyncCallback";
+import { axiosInstance } from "@/src/util/axiosInstance";
+import Router from "next/router";
 
 interface FormValue {
   email: string;
   password: string;
 }
 
-const Signin = () => {
+const Signin: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
+
+  const postUserInfo = (signinData: FormValue) => axiosInstance.post("sign-in", signinData);
+  const { wrappedFunction: postSignin } = useAsyncCallback(postUserInfo);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
-    getValues,
   } = useForm<FormValue>({ mode: "onBlur" });
 
   const handleEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
   };
 
-  const onSubmit: SubmitHandler<FormValue> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    const response = await postSignin(data);
+    if (response?.status === 200) {
+      Router.push("/folder");
+    } else {
+      setError("email", { message: "이메일을 확인해주세요" });
+      setError("password", { message: "비밀번호를 확인해주세요" });
+    }
+  };
 
   return (
     <>

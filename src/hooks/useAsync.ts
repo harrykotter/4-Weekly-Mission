@@ -5,7 +5,7 @@ type AsyncFunction = () => Promise<any>;
 // TODO
 // useAsync함수에 제네릭 부여하기
 
-export const useAsync = (asyncFunction: AsyncFunction, [deps]: any = []) => {
+export const useAsync = (asyncFunction: AsyncFunction, ...deps: any[]) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
   const [data, setData] = useState<any>(null);
@@ -26,7 +26,7 @@ export const useAsync = (asyncFunction: AsyncFunction, [deps]: any = []) => {
   };
   useEffect(() => {
     execute();
-  }, [deps]);
+  }, [...deps]);
 
   return { loading, error, data };
 };
