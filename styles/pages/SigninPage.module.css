@@ -58,13 +58,33 @@
   border: 0.1rem solid var(--red);
 }
 
-.Home {
-  width: 12rem;
-  padding: 1rem;
-  background-color: var(--primary);
+.SubmitButton{
+  width: 100%;
+  padding: 1.8rem 2.4rem;
+  background: linear-gradient(90.99deg, #6D6AFE 0.12%, #6AE3FE 101.84%);
   color: white;
   border: none;
-  border-radius: 1.5rem;
+  border-radius: 0.8rem;
   font-size: 1.6rem;
   text-align: center;
+}
+
+.SocialButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background-color: var(--gray10);
+  color:black;
+  border: 0.1rem solid var(--gray60);
+  border-radius: 1.5rem;
+  font-size: 1.6rem;
+  text-align: left;
+}
+
+.IconWrapper{
+  display: flex;
+  justify-content: space-between;
+  gap: 1.6rem; 
 }
