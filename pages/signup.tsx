@@ -1,15 +1,15 @@
 import styles from "@/styles/pages/SignPage.module.css";
-import { FocusEventHandler, MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import EmailInput from "@/src/ui/EmailInput";
 import PasswordConfirmInput from "@/src/ui/PasswordConfirmInput";
 import CreatePasswordInput from "@/src/ui/CreatePasswordInput";
 import useAsyncCallback from "@/src/hooks/useAsyncCallback";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
+import CreateEmailInput from "@/src/ui/CreateEmailInput";
 
 interface FormValue {
   email: string;
@@ -21,28 +21,17 @@ const Signup: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
 
-  const postCheckEmail = (emailData: FormValue) => axiosInstance.post("check-email", emailData);
-  const { wrappedFunction: postEmailValidation } = useAsyncCallback(postCheckEmail);
-
-  const postCehckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
-  const { wrappedFunction: postSignup } = useAsyncCallback(postCehckAccount);
+  const postCheckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
+  const { wrappedFunction: postSignup } = useAsyncCallback(postCheckAccount);
 
   const {
     register,
     handleSubmit,
     getValues,
-    setError,
     formState: { errors },
   } = useForm<FormValue>({ mode: "onBlur" });
 
   const passwordValue = getValues("password");
-
-  const checkEmail = async (emailInput: string) => {
-    const response = await postEmailValidation({ email: emailInput });
-    if (response?.status !== 200) {
-      setError("email", { message: "이미 사용 중인 이메일입니다" });
-    }
-  };
 
   const handlePasswordEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
@@ -51,13 +40,7 @@ const Signup: React.FC = () => {
     setIsPasswordConfirmOpen(!isPasswordConfirmOpen);
   };
 
-  const handleEmailOnBlur: FocusEventHandler<HTMLInputElement> = async (e) => {
-    checkEmail(e.target.value.trim());
-  };
-
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
-    checkEmail(data.email);
-    if (errors.email?.message) return;
     const response = await postSignup(data);
     if (response?.status === 200) Router.push("/folder");
   };
@@ -83,11 +66,7 @@ const Signup: React.FC = () => {
             </div>
           </div>
           <form className={styles.InputForm} onSubmit={handleSubmit(onSubmit)}>
-            <EmailInput
-              register={register}
-              inputError={errors.email?.message}
-              onBlur={handleEmailOnBlur}
-            />
+            <CreateEmailInput register={register} inputError={errors.email?.message} />
             <CreatePasswordInput
               register={register}
               inputError={errors.password?.message}

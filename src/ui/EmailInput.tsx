@@ -10,10 +10,9 @@ interface FormValue {
 interface InputValue {
   register: UseFormRegister<FormValue>;
   inputError?: string;
-  onBlur?: any;
 }
 
-const EmailInput = ({ register, inputError, onBlur = undefined }: InputValue) => {
+const EmailInput = ({ register, inputError }: InputValue) => {
   return (
     <InputLayout inputError={inputError}>
       <label htmlFor='email'>이메일</label>
@@ -30,7 +29,6 @@ const EmailInput = ({ register, inputError, onBlur = undefined }: InputValue) =>
             message: "올바른 이메일 주소가 아닙니다.",
           },
         })}
-        onBlur={onBlur}
       ></input>
     </InputLayout>
   );
