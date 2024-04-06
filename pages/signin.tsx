@@ -1,4 +1,4 @@
-import styles from "@/styles/pages/SigninPage.module.css";
+import styles from "@/styles/pages/SignPage.module.css";
 import { MouseEventHandler, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Head from "next/head";
@@ -49,7 +49,7 @@ const Signin: React.FC = () => {
       </Head>
       <div className={styles.SignPage}>
         <div className={styles.FormWrapper}>
-          <div className={styles.SigninHeader}>
+          <div className={styles.SignHeader}>
             <Link href='/'>
               <Image
                 width={210}

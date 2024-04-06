@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import InputLayout from "./InputLayout";
-import styles from "@/styles/pages/SigninPage.module.css";
+import styles from "@/styles/pages/SignPage.module.css";
 
 interface FormValue {
   email: string;

@@ -21,6 +21,9 @@ export default function Home() {
             <Link href="/signin" className={styles.linkButton}>
               로그인 페이지
             </Link>
+            <Link href="/signup" className={styles.linkButton}>
+              회원가입 페이지
+            </Link>
           </div>
         </div>
       </Layout>
