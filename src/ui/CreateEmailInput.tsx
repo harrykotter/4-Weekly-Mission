@@ -13,7 +13,7 @@ interface InputValue {
   onBlur?: any;
 }
 
-const EmailInput = ({ register, inputError, onBlur = undefined }: InputValue) => {
+const CreateEmailInput = ({ register, inputError, onBlur = undefined }: InputValue) => {
   return (
     <InputLayout inputError={inputError}>
       <label htmlFor='email'>이메일</label>
@@ -36,4 +36,4 @@ const EmailInput = ({ register, inputError, onBlur = undefined }: InputValue) =>
   );
 };
 
-export default EmailInput;
+export default CreateEmailInput;

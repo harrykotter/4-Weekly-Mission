@@ -1,12 +1,15 @@
 import styles from "@/styles/pages/SignPage.module.css";
-import { MouseEventHandler, useState } from "react";
+import { FocusEventHandler, MouseEventHandler, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
-import PasswordInput from "@/src/ui/PasswordInput";
 import PasswordConfirmInput from "@/src/ui/PasswordConfirmInput";
+import CreatePasswordInput from "@/src/ui/CreatePasswordInput";
+import useAsyncCallback from "@/src/hooks/useAsyncCallback";
+import { axiosInstance } from "@/src/util/axiosInstance";
+import Router from "next/router";
 
 interface FormValue {
   email: string;
@@ -18,14 +21,28 @@ const Signup: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
 
+  const postCheckEmail = (emailData: FormValue) => axiosInstance.post("check-email", emailData);
+  const { wrappedFunction: postEmailValidation } = useAsyncCallback(postCheckEmail);
+
+  const postCehckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
+  const { wrappedFunction: postSignup } = useAsyncCallback(postCehckAccount);
+
   const {
     register,
     handleSubmit,
     getValues,
+    setError,
     formState: { errors },
   } = useForm<FormValue>({ mode: "onBlur" });
 
-const passwordValue = getValues('password');
+  const passwordValue = getValues("password");
+
+  const checkEmail = async (emailInput: string) => {
+    const response = await postEmailValidation({ email: emailInput });
+    if (response?.status !== 200) {
+      setError("email", { message: "이미 사용 중인 이메일입니다" });
+    }
+  };
 
   const handlePasswordEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
@@ -34,8 +51,15 @@ const passwordValue = getValues('password');
     setIsPasswordConfirmOpen(!isPasswordConfirmOpen);
   };
 
-  const onSubmit: SubmitHandler<FormValue> = (data) => {
-    console.log(data);
+  const handleEmailOnBlur: FocusEventHandler<HTMLInputElement> = async (e) => {
+    checkEmail(e.target.value.trim());
+  };
+
+  const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    checkEmail(data.email);
+    if (errors.email?.message) return;
+    const response = await postSignup(data);
+    if (response?.status === 200) Router.push("/folder");
   };
 
   return (
@@ -59,19 +83,24 @@ const passwordValue = getValues('password');
             </div>
           </div>
           <form className={styles.InputForm} onSubmit={handleSubmit(onSubmit)}>
-            <EmailInput register={register} inputError={errors.email?.message} />
-            <PasswordInput
+            <EmailInput
+              register={register}
+              inputError={errors.email?.message}
+              onBlur={handleEmailOnBlur}
+            />
+            <CreatePasswordInput
               register={register}
               inputError={errors.password?.message}
               isPasswordOpen={isPasswordOpen}
               handleEyeconClick={handlePasswordEyeconClick}
             />
             <PasswordConfirmInput
-            register={register}
+              register={register}
               inputError={errors.passwordConfirm?.message}
               isPasswordOpen={isPasswordConfirmOpen}
               passwordValue={passwordValue}
-              handleEyeconClick={handlePasswordConfirmEyeconClick}/>
+              handleEyeconClick={handlePasswordConfirmEyeconClick}
+            />
             <button className={styles.SubmitButton} type='submit'>
               회원 가입하기
             </button>
