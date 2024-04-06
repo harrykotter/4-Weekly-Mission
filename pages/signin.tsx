@@ -73,6 +73,17 @@ const Signin: React.FC = () => {
             <button className={styles.SubmitButton} type='submit'>
               로그인
             </button>
+            <div className={styles.SocialButton}>
+              소셜 로그인
+              <div className={styles.IconWrapper}>
+                <Link href='https://www.google.com'>
+                  <Image width={42} height={42} alt='google' src='/assets/google-icon.svg' />
+                </Link>
+                <Link href='https://www.kakaocorp.com/page'>
+                  <Image width={42} height={42} alt='kakaotalk' src='/assets/kakaotalk-icon.svg' />
+                </Link>
+              </div>
+            </div>
           </form>
         </div>
       </div>
