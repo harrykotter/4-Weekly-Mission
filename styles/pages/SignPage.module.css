@@ -4,6 +4,8 @@
   background-color: var(--light-blue);
 }
 
+/* TODO
+padding-top 크기 단위 조정하기 */
 .FormWrapper {
   margin: auto;
   padding: 3.2rem;
@@ -58,10 +60,10 @@
   border: 0.1rem solid var(--red);
 }
 
-.SubmitButton{
+.SubmitButton {
   width: 100%;
   padding: 1.8rem 2.4rem;
-  background: linear-gradient(90.99deg, #6D6AFE 0.12%, #6AE3FE 101.84%);
+  background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
   color: white;
   border: none;
   border-radius: 0.8rem;
@@ -76,15 +78,15 @@
   width: 100%;
   padding: 1.2rem 2rem;
   background-color: var(--gray10);
-  color:black;
+  color: black;
   border: 0.1rem solid var(--gray60);
   border-radius: 1.5rem;
   font-size: 1.6rem;
   text-align: left;
 }
 
-.IconWrapper{
+.IconWrapper {
   display: flex;
   justify-content: space-between;
-  gap: 1.6rem; 
+  gap: 1.6rem;
 }

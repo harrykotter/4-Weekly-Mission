@@ -10,13 +10,7 @@ import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
 
 import styles from "@/styles/pages/FolderPage.module.css";
-import {
-  useState,
-  useRef,
-  useEffect,
-  ChangeEventHandler,
-  MouseEventHandler,
-} from "react";
+import { useState, useRef, useEffect, ChangeEventHandler, MouseEventHandler } from "react";
 import Head from "next/head";
 
 const FolderPage: React.FC = () => {
@@ -34,13 +28,13 @@ const FolderPage: React.FC = () => {
   const footerRef = useRef(null);
   const isAddLinkFixed = !isAddLinkShown && !isFooterShown;
 
+  //TODO//
+  //변수명 link, folder 교체
   const { data: linkData } = useGetLink();
   const { folderData } = useGetFolderByLink(folderId);
   const links = folderData?.data;
 
-  const linkDataWithAll = Array.isArray(linkData)
-    ? [{ name: "전체", id: "0" }, ...linkData]
-    : [];
+  const linkDataWithAll = Array.isArray(linkData) ? [{ name: "전체", id: "0" }, ...linkData] : [];
   const navFixed = true;
 
   const handleCategoryClick: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -68,15 +62,14 @@ const FolderPage: React.FC = () => {
     const addLinkObserver = new IntersectionObserver(
       ([entry]) => {
         setIsAddLinkShown(entry.isIntersecting);
-
       },
-      { threshold: 0 },
+      { threshold: 0 }
     );
     const footerObserver = new IntersectionObserver(
       ([entry]) => {
         setIsFooterShown(entry.isIntersecting);
       },
-      { threshold: 0 },
+      { threshold: 0 }
     );
     if (addLinkRef.current) {
       addLinkObserver.observe(addLinkRef.current);
@@ -98,10 +91,8 @@ const FolderPage: React.FC = () => {
   const filteredLinks = links?.filter(
     (link) =>
       link.title?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-      link.description
-        ?.toLowerCase()
-        .includes(searchTerm.trim().toLowerCase()) ||
-      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase()),
+      link.description?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
+      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase())
   );
 
   return (
@@ -134,18 +125,11 @@ const FolderPage: React.FC = () => {
               categoryId={folderId}
               handleModalClick={handleModalClick}
             />
-            <EditLink
-              currentCategory={currentCategory}
-              handleEditClick={handleModalClick}
-            />
+            <EditLink currentCategory={currentCategory} handleEditClick={handleModalClick} />
             {filteredLinks && filteredLinks.length > 0 ? (
               <CardList>
                 {filteredLinks?.map((link) => (
-                  <Card
-                    key={link?.id}
-                    {...link}
-                    handleModalClick={handleModalClick}
-                  />
+                  <Card key={link?.id} {...link} handleModalClick={handleModalClick} />
                 ))}
               </CardList>
             ) : (

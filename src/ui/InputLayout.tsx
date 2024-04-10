@@ -25,6 +25,9 @@ const InputLayout = ({ isEyeOpen, inputError, handleEyeconClick, children }: Pro
             className={styles.eyecon}
             onClick={handleEyeconClick}
           />
+          // TODO
+          // 이미지 태그 자체보단 button태그로 감싸
+          // 시맨틱하게 유지하기
         )}
       </div>
       <span className={styles.errorText}>{inputError}</span>
