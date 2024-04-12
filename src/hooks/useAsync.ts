@@ -1,32 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-type AsyncFunction = () => Promise<any>;
-
-// TODO
-// 기존 useAsync함수 callback함수 사용 형태로 변경
-
-export const useAsync = (asyncFunction: AsyncFunction, ...deps: any[]) => {
-  const [loading, setLoading] = useState(true);
+function useAsync<T>(callback: (args?: any) => Promise<any>) {
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState<any>(null);
-  const [data, setData] = useState<any>(null);
-
-  const execute = async () => {
-    setLoading(true);
-    setError(null);
-    setData(null);
+  // TODO
+  // 에러 상태일 때 setError(false) 확인해보기
+  const wrappedFunction: (args?: any) => Promise<T> = async (...args) => {
     try {
-      const response = await asyncFunction();
-      setData(response?.data);
-      return response;
+      setPending(true);
+      setError(null);
+      return await callback(...args);
     } catch (error) {
       setError(error);
     } finally {
-      setLoading(false);
+      setPending(false);
     }
   };
-  useEffect(() => {
-    execute();
-  }, [...deps]);
 
-  return { loading, error, data };
-};
+  return { pending, error, wrappedFunction };
+}
+
+export default useAsync;

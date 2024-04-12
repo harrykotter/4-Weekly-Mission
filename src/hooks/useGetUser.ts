@@ -1,18 +1,16 @@
-import { useAsync } from "./useAsync";
 import { axiosInstance } from "../util/axiosInstance";
 import { DEFAULT_PROFILE } from "../util/constant";
 
-export const useGetUser = () => {
-  const getUser = () => axiosInstance.get("users/1");
-  const { loading, error, data } = useAsync(getUser);
-  const userData = data ? data?.data[0] : null;
-  const formattedData = userData
+export const useGetUser = async () => {
+  const response = await axiosInstance.get("users/1");
+  const data = response.data ? response.data?.data[0] : null;
+  const userData = data
     ? {
-        id: userData.id,
-        name: userData.name,
-        email: userData.email,
-        profileImageSource: userData.image_source || DEFAULT_PROFILE,
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        profileImageSource: data.image_source || DEFAULT_PROFILE,
       }
     : null;
-  return { loading, error, data: formattedData };
+  return userData;
 };

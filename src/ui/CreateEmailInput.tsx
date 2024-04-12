@@ -2,7 +2,7 @@ import { UseFormRegister } from "react-hook-form";
 import InputLayout from "./InputLayout";
 import styles from "@/styles/pages/SignPage.module.css";
 import { axiosInstance } from "../util/axiosInstance";
-import useAsyncCallback from "../hooks/useAsyncCallback";
+import useAsync from "../hooks/useAsync";
 
 interface FormValue {
   email: string;
@@ -16,7 +16,7 @@ interface InputValue {
 
 const CreateEmailInput = ({ register, inputError }: InputValue) => {
   const postCheckEmail = (emailData: FormValue) => axiosInstance.post("check-email", emailData);
-  const { wrappedFunction: postEmailValidation } = useAsyncCallback(postCheckEmail);
+  const { wrappedFunction: postEmailValidation } = useAsync(postCheckEmail);
 
   return (
     <InputLayout inputError={inputError}>

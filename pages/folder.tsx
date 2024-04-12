@@ -3,8 +3,9 @@ import Layout from "@/src/feature/Layout";
 import SearchBar from "@/src/ui/SearchBar";
 import { CardList } from "@/src/ui/CardList";
 import { Card } from "@/src/ui/Card";
-import { useGetLink } from "@/src/hooks/useGetLink";
-import { useGetFolderByLink } from "@/src/hooks/useGetFolderByLink";
+import useAsync from "@/src/hooks/useAsync";
+import { useGetFolder } from "@/src/hooks/useGetFolder";
+import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
 import Category from "@/src/ui/Category";
 import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
@@ -12,14 +13,29 @@ import Modal from "@/src/ui/Modal/Modal";
 import styles from "@/styles/pages/FolderPage.module.css";
 import { useState, useRef, useEffect, ChangeEventHandler, MouseEventHandler } from "react";
 import Head from "next/head";
+import { MappedLink } from "@/src/util/mapFolderFromLink";
+
+interface Folder {
+  created_at: string;
+  favorite: boolean;
+  id: number;
+  link: { count: number };
+  name: string;
+  user_id: number;
+}
 
 const FolderPage: React.FC = () => {
+  const { wrappedFunction: getFolder } = useAsync<Folder[]>(useGetFolder);
+  const { wrappedFunction: getLinksByFolderId } = useAsync<any>(useGetLinksByFolderId);
+
   const [currentCategory, setCurrentCategory] = useState("전체");
   const [folderId, setFolderId] = useState("0");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [linksData, setLinksData] = useState<MappedLink[]>([]);
+  const [folderData, setFolderData] = useState<Folder[]>([]);
 
   const [isAddLinkShown, setIsAddLinkShown] = useState(true);
   const [isFooterShown, setIsFooterShown] = useState(false);
@@ -28,13 +44,14 @@ const FolderPage: React.FC = () => {
   const footerRef = useRef(null);
   const isAddLinkFixed = !isAddLinkShown && !isFooterShown;
 
-  //TODO//
-  //변수명 link, folder 교체
-  const { data: linkData } = useGetLink();
-  const { folderData } = useGetFolderByLink(folderId);
-  const links = folderData?.data;
+  useEffect(() => {
+    getLinksByFolderId(folderId).then((result) => setLinksData(result?.data));
+    getFolder().then(setFolderData);
+  }, [folderId]);
 
-  const linkDataWithAll = Array.isArray(linkData) ? [{ name: "전체", id: "0" }, ...linkData] : [];
+  const folderDataWithAll = Array.isArray(folderData)
+    ? [{ name: "전체", id: "0" }, ...folderData]
+    : [];
   const navFixed = true;
 
   const handleCategoryClick: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -88,7 +105,7 @@ const FolderPage: React.FC = () => {
     };
   }, []);
 
-  const filteredLinks = links?.filter(
+  const filteredLinks = linksData?.filter(
     (link) =>
       link.title?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
       link.description?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
@@ -105,7 +122,7 @@ const FolderPage: React.FC = () => {
           currentCategory={currentCategory}
           modal={modal}
           setIsModalOpen={setIsModalOpen}
-          categoryData={linkData}
+          categoryData={folderData}
           currentUrl={currentUrl}
           selectedId={+folderId}
         />
@@ -121,7 +138,7 @@ const FolderPage: React.FC = () => {
             />
             <Category
               buttonClicked={handleCategoryClick}
-              linkData={linkDataWithAll}
+              linkData={folderDataWithAll}
               categoryId={folderId}
               handleModalClick={handleModalClick}
             />

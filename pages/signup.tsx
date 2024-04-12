@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PasswordConfirmInput from "@/src/ui/PasswordConfirmInput";
 import CreatePasswordInput from "@/src/ui/CreatePasswordInput";
-import useAsyncCallback from "@/src/hooks/useAsyncCallback";
+import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
@@ -22,7 +22,7 @@ const Signup: React.FC = () => {
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
 
   const postCheckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
-  const { wrappedFunction: postSignup } = useAsyncCallback(postCheckAccount);
+  const { wrappedFunction: postSignup } = useAsync<FormValue>(postCheckAccount);
 
   const {
     register,

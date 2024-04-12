@@ -1,7 +1,8 @@
 import { useGetUser } from "@/src/hooks/useGetUser";
 import Footer from "./Footer/Footer";
 import NavigationBar from "./NavigationBar";
-import { ReactNode, RefObject } from "react";
+import { ReactNode, RefObject, useEffect, useState } from "react";
+import useAsync from "../hooks/useAsync";
 
 interface layoutProps {
   children: ReactNode;
@@ -9,8 +10,20 @@ interface layoutProps {
   isNavFixed?: boolean;
 }
 
+interface Data {
+  id: number;
+  name: string;
+  email: string;
+  profileImageSource: string;
+}
+
 const Layout = ({ children, isNavFixed, footerRef }: layoutProps) => {
-  const { data } = useGetUser();
+  const { wrappedFunction: getUser } = useAsync<Data>(useGetUser);
+  const [data, setData] = useState<Data>();
+  useEffect(() => {
+    getUser().then(setData);
+  });
+
   const { email, profileImageSource } = data || {};
   const profile = data ? { email, profileImageSource } : {};
 

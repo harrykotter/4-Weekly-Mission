@@ -25,7 +25,7 @@ interface linkData extends Omit<Link, "title"> {
   elapsedTime: string;
 }
 
-type FolderData = {
+export type FolderData = {
   profileImage: string;
   ownerName: string;
   folderName: string;
@@ -33,8 +33,7 @@ type FolderData = {
 };
 
 export const mapFolderData = (folder: Folder): FolderData => {
-  if (!folder)
-    return { profileImage: "", ownerName: "", folderName: "", links: [] };
+  if (!folder) return { profileImage: "", ownerName: "", folderName: "", links: [] };
   const { name, owner, links } = folder;
 
   const mapLinks = (link: Link) => {

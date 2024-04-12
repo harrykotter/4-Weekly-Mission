@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
-import useAsyncCallback from "@/src/hooks/useAsyncCallback";
+import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 
@@ -18,8 +18,8 @@ interface FormValue {
 const Signin: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
-  const postUserInfo = (signinData: FormValue) => axiosInstance.post("sign-in", signinData);
-  const { wrappedFunction: postSignin } = useAsyncCallback(postUserInfo);
+  const postUserInfo = (signinData?: FormValue) => axiosInstance.post("sign-in", signinData);
+  const { wrappedFunction: postSignin } = useAsync<FormValue>(postUserInfo);
 
   const {
     register,

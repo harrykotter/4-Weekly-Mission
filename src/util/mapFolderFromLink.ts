@@ -1,7 +1,7 @@
 import format from "date-fns/format";
 import { getElapsedTime } from "./getElapsedTime";
 
-interface MappedLink {
+export interface MappedLink {
   id: number;
   url: string;
   imageSource: string;
@@ -23,9 +23,7 @@ interface Link {
   favorite?: boolean;
 }
 
-export const mapFolderFromLink: (data: Link[]) => { data: MappedLink[] } = (
-  data,
-) => {
+export const mapFolderFromLink: (data: Link[]) => { data: MappedLink[] } = (data) => {
   if (!data) return { data: [] };
 
   const mapLinks = (link: Link) => {

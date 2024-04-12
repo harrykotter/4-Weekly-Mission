@@ -1,0 +1,19 @@
+# useGetFolder folderData
+# 링크들이 담긴 폴더에 대한 데이터만
+GET https://bootcamp-api.codeit.kr/api/users/1/folders
+######
+# useGetFolderInfo linkData
+# 공유받은 폴더 유저와 폴더 링크들에 대한 데이터
+GET https://bootcamp-api.codeit.kr/api/sample/folder
+###
+# useGetLinksByFolderId linkData
+# 폴더 전체 데이터?
+GET https://bootcamp-api.codeit.kr/api/users/1/links
+###
+# useGetLinksByFolderId linkData
+# 각 폴더에 대한 데이터
+GET https://bootcamp-api.codeit.kr/api/users/1/links?folderId=$513
+###
+# useGetUser userData
+# 사용자 정보
+GET https://bootcamp-api.codeit.kr/api/users/1

@@ -4,17 +4,18 @@
   background-color: var(--light-blue);
 }
 
-/* TODO
-padding-top 크기 단위 조정하기 */
 .FormWrapper {
   margin: auto;
   padding: 3.2rem;
-  padding-top: 20%;
+  padding-top: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
+  @media (min-width: 768px) {
+    padding-top: 20rem;
+  }
 }
 
 .SignHeader {

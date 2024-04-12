@@ -17,17 +17,9 @@ const InputLayout = ({ isEyeOpen, inputError, handleEyeconClick, children }: Pro
       <div className={styles.InputWrapper}>
         {children}
         {isEyeOpen !== undefined && (
-          <Image
-            width={24}
-            height={16}
-            src={eyecon}
-            alt='눈 아이콘'
-            className={styles.eyecon}
-            onClick={handleEyeconClick}
-          />
-          // TODO
-          // 이미지 태그 자체보단 button태그로 감싸
-          // 시맨틱하게 유지하기
+          <button onClick={handleEyeconClick}>
+            <Image width={24} height={16} src={eyecon} alt='눈 아이콘' className={styles.eyecon} />
+          </button>
         )}
       </div>
       <span className={styles.errorText}>{inputError}</span>
