@@ -22,7 +22,7 @@ const Layout = ({ children, isNavFixed, footerRef }: layoutProps) => {
   const [data, setData] = useState<Data>();
   useEffect(() => {
     getUser().then(setData);
-  });
+  }, []);
 
   const { email, profileImageSource } = data || {};
   const profile = data ? { email, profileImageSource } : {};

@@ -29,7 +29,7 @@ const FolderPage: React.FC = () => {
   const { wrappedFunction: getLinksByFolderId } = useAsync<any>(useGetLinksByFolderId);
 
   const [currentCategory, setCurrentCategory] = useState("전체");
-  const [folderId, setFolderId] = useState("0");
+  const [folderId, setFolderId] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
@@ -45,7 +45,7 @@ const FolderPage: React.FC = () => {
   const isAddLinkFixed = !isAddLinkShown && !isFooterShown;
 
   useEffect(() => {
-    getLinksByFolderId(folderId).then((result) => setLinksData(result?.data));
+    getLinksByFolderId(1, folderId).then((result) => setLinksData(result?.data));
     getFolder().then(setFolderData);
   }, [folderId]);
 
@@ -59,7 +59,7 @@ const FolderPage: React.FC = () => {
     const category = eventTarget.innerText;
     const Id = eventTarget.id;
     setCurrentCategory(category);
-    setFolderId(Id || "");
+    setFolderId(+Id || 0);
   };
   const handleModalClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const eventTarget = e.target as HTMLElement;
@@ -124,7 +124,7 @@ const FolderPage: React.FC = () => {
           setIsModalOpen={setIsModalOpen}
           categoryData={folderData}
           currentUrl={currentUrl}
-          selectedId={+folderId}
+          selectedId={folderId}
         />
       )}
       <Layout isNavFixed={navFixed} footerRef={footerRef}>
@@ -139,7 +139,7 @@ const FolderPage: React.FC = () => {
             <Category
               buttonClicked={handleCategoryClick}
               linkData={folderDataWithAll}
-              categoryId={folderId}
+              categoryId={folderId.toString()}
               handleModalClick={handleModalClick}
             />
             <EditLink currentCategory={currentCategory} handleEditClick={handleModalClick} />

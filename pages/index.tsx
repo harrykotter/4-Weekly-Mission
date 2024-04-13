@@ -12,16 +12,16 @@ export default function Home() {
       <Layout>
         <div className={styles.Landing}>
           <div className={styles.LinkWrapper}>
-            <Link href="/folder" className={styles.linkButton}>
+            <Link href='/folder' className={styles.linkButton}>
               폴더 페이지
             </Link>
-            <Link href="/shared" className={styles.linkButton}>
+            <Link href='/shared/315' className={styles.linkButton}>
               공유 페이지
             </Link>
-            <Link href="/signin" className={styles.linkButton}>
+            <Link href='/signin' className={styles.linkButton}>
               로그인 페이지
             </Link>
-            <Link href="/signup" className={styles.linkButton}>
+            <Link href='/signup' className={styles.linkButton}>
               회원가입 페이지
             </Link>
           </div>
