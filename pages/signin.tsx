@@ -16,10 +16,13 @@ interface FormValue {
 }
 
 const Signin: React.FC = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) Router.push("/folder");
+
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
   const postUserInfo = (signinData?: FormValue) => axiosInstance.post("sign-in", signinData);
-  const { wrappedFunction: postSignin } = useAsync<FormValue>(postUserInfo);
+  const { wrappedFunction: postSignin } = useAsync<any>(postUserInfo);
 
   const {
     register,
@@ -35,6 +38,8 @@ const Signin: React.FC = () => {
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
     const response = await postSignin(data);
     if (response?.status === 200) {
+      const accessToken = response.accessToken;
+      localStorage.setItem("accessToken", accessToken);
       Router.push("/folder");
     } else {
       setError("email", { message: "이메일을 확인해주세요" });

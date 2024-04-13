@@ -18,11 +18,14 @@ interface FormValue {
 }
 
 const Signup: React.FC = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) Router.push("/folder");
+
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
 
   const postCheckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
-  const { wrappedFunction: postSignup } = useAsync<FormValue>(postCheckAccount);
+  const { wrappedFunction: postSignup } = useAsync<any>(postCheckAccount);
 
   const {
     register,
@@ -42,7 +45,11 @@ const Signup: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
     const response = await postSignup(data);
-    if (response?.status === 200) Router.push("/folder");
+    if (response?.status === 200) {
+      const accessToken = response.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+      Router.push("/folder");
+    }
   };
 
   return (
