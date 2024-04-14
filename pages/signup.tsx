@@ -10,6 +10,7 @@ import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
+import { setAxiosHeader } from "@/src/util/setAxiosToken";
 
 interface FormValue {
   email: string;
@@ -47,6 +48,7 @@ const Signup: React.FC = () => {
     if (response?.status === 200) {
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
+      setAxiosHeader(accessToken.data.accessToken);
       Router.push("/folder");
     }
   };

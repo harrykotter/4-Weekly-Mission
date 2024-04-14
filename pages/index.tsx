@@ -12,7 +12,7 @@ export default function Home() {
       <Layout>
         <div className={styles.Landing}>
           <div className={styles.LinkWrapper}>
-            <Link href='/folder' className={styles.linkButton}>
+            <Link href='/folder/sample' className={styles.linkButton}>
               폴더 페이지
             </Link>
             <Link href='/shared/315' className={styles.linkButton}>
