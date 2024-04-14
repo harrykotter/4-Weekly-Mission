@@ -17,7 +17,7 @@ interface FormValue {
 }
 
 const Signin: React.FC = () => {
-  // if (localStorage.getItem("accessToken")) Router.push("/folder");
+  if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
