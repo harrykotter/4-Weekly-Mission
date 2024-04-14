@@ -14,6 +14,7 @@ import styles from "@/styles/pages/FolderPage.module.css";
 import { useState, useRef, useEffect, ChangeEventHandler, MouseEventHandler } from "react";
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
+import Router from "next/router";
 
 interface Folder {
   created_at: string;
@@ -45,8 +46,10 @@ const FolderPage: React.FC = () => {
   const isAddLinkFixed = !isAddLinkShown && !isFooterShown;
 
   useEffect(() => {
-    getLinksByFolderId(1, folderId).then((result) => setLinksData(result?.data));
-    getFolder().then(setFolderData);
+    if (localStorage.getItem("accessToken")) {
+      getLinksByFolderId(1, folderId).then((result) => setLinksData(result?.data));
+      getFolder().then(setFolderData);
+    } else Router.push("/signin");
   }, [folderId]);
 
   const folderDataWithAll = Array.isArray(folderData)
