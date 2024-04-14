@@ -10,6 +10,7 @@ import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
+import { hasCookie, setCookie } from "cookies-next";
 
 interface FormValue {
   email: string;
@@ -18,8 +19,7 @@ interface FormValue {
 }
 
 const Signup: React.FC = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) Router.push("/folder");
+  if (hasCookie("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const Signup: React.FC = () => {
     const response = await postSignup(data);
     if (response?.status === 200) {
       const accessToken = response.accessToken;
-      localStorage.setItem("accessToken", accessToken);
+      setCookie("accessToken", accessToken);
       Router.push("/folder");
     }
   };

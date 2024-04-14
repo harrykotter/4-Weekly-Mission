@@ -9,6 +9,7 @@ import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
+import { hasCookie, setCookie } from "cookies-next";
 
 interface FormValue {
   email: string;
@@ -16,8 +17,7 @@ interface FormValue {
 }
 
 const Signin: React.FC = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) Router.push("/folder");
+  if (hasCookie("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
@@ -39,7 +39,7 @@ const Signin: React.FC = () => {
     const response = await postSignin(data);
     if (response?.status === 200) {
       const accessToken = response.accessToken;
-      localStorage.setItem("accessToken", accessToken);
+      setCookie("accessToken", accessToken);
       Router.push("/folder");
     } else {
       setError("email", { message: "이메일을 확인해주세요" });
