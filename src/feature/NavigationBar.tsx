@@ -13,25 +13,23 @@ interface NavProps {
 }
 
 const NavigationBar = ({ profile, isNavFixed }: NavProps) => {
-  const NavBar = isNavFixed
-    ? `${styles.NavigationBar} ${styles.NavFixed}`
-    : styles.NavigationBar;
+  const NavBar = isNavFixed ? `${styles.NavigationBar} ${styles.NavFixed}` : styles.NavigationBar;
   return (
     <nav className={NavBar}>
       <div className={styles.NavigationBarItems}>
-        <Link href="/">
+        <Link href='/'>
           <Image
             width={133}
             height={100}
             className={styles.NavigationBarLogo}
-            src="/assets/linkbrary.svg"
-            alt="Linkbrary 서비스 로고"
+            src='/assets/linkbrary.svg'
+            alt='Linkbrary 서비스 로고'
           />
         </Link>
         {profile ? (
           <Profile profile={profile} />
         ) : (
-          <Link href="/signin">
+          <Link href='/signin'>
             <Cta>
               <span className={styles.NavigationBarSignin}>로그인</span>
             </Cta>

@@ -3,6 +3,7 @@ import Footer from "./Footer/Footer";
 import NavigationBar from "./NavigationBar";
 import { ReactNode, RefObject, useEffect, useState } from "react";
 import useAsync from "../hooks/useAsync";
+import { setAxiosHeader } from "../util/setAxiosToken";
 
 interface layoutProps {
   children: ReactNode;
@@ -10,22 +11,27 @@ interface layoutProps {
   isNavFixed?: boolean;
 }
 
-interface Data {
-  id: number;
-  name: string;
-  email: string;
-  profileImageSource: string;
-}
+type Data = {
+  id?: number;
+  name?: string;
+  email?: string;
+  profileImageSource?: string;
+} | null;
 
 const Layout = ({ children, isNavFixed, footerRef }: layoutProps) => {
   const { wrappedFunction: getUser } = useAsync<Data>(useGetUser);
-  const [data, setData] = useState<Data>();
+  const [data, setData] = useState<Data>(null);
   useEffect(() => {
-    getUser().then(setData);
+    if (!localStorage.getItem("accessToken")) {
+      setData(null);
+    } else {
+      setAxiosHeader();
+      getUser().then(setData);
+    }
   }, []);
 
   const { email, profileImageSource } = data || {};
-  const profile = data ? { email, profileImageSource } : {};
+  const profile = data !== null ? { email, profileImageSource } : undefined;
 
   return (
     <div>
