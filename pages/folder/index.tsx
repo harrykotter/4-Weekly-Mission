@@ -4,7 +4,6 @@ import SearchBar from "@/src/ui/SearchBar";
 import { CardList } from "@/src/ui/CardList";
 import { Card } from "@/src/ui/Card";
 import useAsync from "@/src/hooks/useAsync";
-import { useGetFolder } from "@/src/hooks/useGetFolder";
 import Category from "@/src/ui/Category";
 import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
@@ -30,7 +29,6 @@ interface Folder {
 const FolderPage: React.FC = () => {
   const getFolderData = () => axiosInstance.get("folders");
   const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
-  const { wrappedFunction: getFolder } = useAsync<Folder[]>(useGetFolder);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 
   const [currentCategory, setCurrentCategory] = useState("전체");
