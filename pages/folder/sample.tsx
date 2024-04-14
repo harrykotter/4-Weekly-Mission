@@ -5,7 +5,6 @@ import { CardList } from "@/src/ui/CardList";
 import { Card } from "@/src/ui/Card";
 import useAsync from "@/src/hooks/useAsync";
 import { useGetFolder } from "@/src/hooks/useGetFolder";
-import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
 import Category from "@/src/ui/Category";
 import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
@@ -14,9 +13,10 @@ import styles from "@/styles/pages/FolderPage.module.css";
 import { useState, useRef, useEffect, ChangeEventHandler, MouseEventHandler } from "react";
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
-import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 import { setAxiosHeader } from "@/src/util/setAxiosToken";
+import { useGetLinks } from "@/src/hooks/useGetLink";
+import { axiosInstance } from "@/src/util/axiosInstance";
 
 interface Folder {
   created_at: string;
@@ -28,10 +28,10 @@ interface Folder {
 }
 
 const FolderPage: React.FC = () => {
-  const getLinks = () => axiosInstance.get("/links");
-  const { wrappedFunction: getLink } = useAsync<any>(getLinks);
+  const getFolderData = () => axiosInstance.get("folders");
+  const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
   const { wrappedFunction: getFolder } = useAsync<Folder[]>(useGetFolder);
-  const { wrappedFunction: getLinksByFolderId } = useAsync<any>(useGetLinksByFolderId);
+  const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 
   const [currentCategory, setCurrentCategory] = useState("전체");
   const [folderId, setFolderId] = useState(0);
@@ -53,9 +53,8 @@ const FolderPage: React.FC = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       setAxiosHeader();
-      getLink().then((result) => console.log(result));
-      getLinksByFolderId(1, folderId).then((result) => setLinksData(result?.data));
-      getFolder().then(setFolderData);
+      getLinks(folderId).then((response) => setLinksData(response.data));
+      getFolderList().then((response) => setFolderData(response?.data?.data.folder));
     } else Router.push("/signin");
   }, [folderId]);
 
