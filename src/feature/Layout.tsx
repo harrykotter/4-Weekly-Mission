@@ -3,7 +3,7 @@ import Footer from "./Footer/Footer";
 import NavigationBar from "./NavigationBar";
 import { ReactNode, RefObject, useEffect, useState } from "react";
 import useAsync from "../hooks/useAsync";
-import { setAxiosHeader } from "../util/setAxiosToken";
+// import { setAxiosHeader } from "../util/setAxiosToken";
 
 interface layoutProps {
   children: ReactNode;
@@ -25,7 +25,7 @@ const Layout = ({ children, isNavFixed, footerRef }: layoutProps) => {
     if (!localStorage.getItem("accessToken")) {
       setData(null);
     } else {
-      setAxiosHeader();
+      // setAxiosHeader();
       getUser().then(setData);
     }
   }, []);

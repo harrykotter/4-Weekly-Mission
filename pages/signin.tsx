@@ -9,7 +9,7 @@ import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
-import { setAxiosHeader } from "@/src/util/setAxiosToken";
+// import { setAxiosHeader } from "@/src/util/setAxiosToken";
 
 interface FormValue {
   email: string;
@@ -21,7 +21,8 @@ const Signin: React.FC = () => {
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
-  const postUserInfo = (signinData?: FormValue) => axiosInstance.post("sign-in", signinData);
+  const postUserInfo = (signinData?: FormValue) =>
+    axiosInstance.post("sign-in", signinData);
   const { wrappedFunction: postSignin } = useAsync<any>(postUserInfo);
 
   const {
@@ -41,7 +42,7 @@ const Signin: React.FC = () => {
       console.log(response);
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
-      setAxiosHeader(accessToken.data.accessToken);
+      // setAxiosHeader(accessToken.data.accessToken);
       Router.push("/folder");
     } else {
       setError("email", { message: "이메일을 확인해주세요" });
@@ -57,37 +58,50 @@ const Signin: React.FC = () => {
       <div className={styles.SignPage}>
         <div className={styles.FormWrapper}>
           <div className={styles.SignHeader}>
-            <Link href='/'>
+            <Link href="/">
               <Image
                 width={210}
                 height={40}
-                src='/assets/linkbrary.svg'
-                alt='Linkbrary 서비스 로고'
+                src="/assets/linkbrary.svg"
+                alt="Linkbrary 서비스 로고"
               />
             </Link>
             <div className={styles.SignMsg}>
-              회원이 아니신가요? <Link href='/signup'>회원 가입하기</Link>
+              회원이 아니신가요? <Link href="/signup">회원 가입하기</Link>
             </div>
           </div>
           <form className={styles.InputForm} onSubmit={handleSubmit(onSubmit)}>
-            <EmailInput register={register} inputError={errors.email?.message} />
+            <EmailInput
+              register={register}
+              inputError={errors.email?.message}
+            />
             <PasswordInput
               register={register}
               inputError={errors.password?.message}
               isPasswordOpen={isPasswordOpen}
               handleEyeconClick={handleEyeconClick}
             />
-            <button className={styles.SubmitButton} type='submit'>
+            <button className={styles.SubmitButton} type="submit">
               로그인
             </button>
             <div className={styles.SocialButton}>
               소셜 로그인
               <div className={styles.IconWrapper}>
-                <Link href='https://www.google.com'>
-                  <Image width={42} height={42} alt='google' src='/assets/google-icon.svg' />
+                <Link href="https://www.google.com">
+                  <Image
+                    width={42}
+                    height={42}
+                    alt="google"
+                    src="/assets/google-icon.svg"
+                  />
                 </Link>
-                <Link href='https://www.kakaocorp.com/page'>
-                  <Image width={42} height={42} alt='kakaotalk' src='/assets/kakaotalk-icon.svg' />
+                <Link href="https://www.kakaocorp.com/page">
+                  <Image
+                    width={42}
+                    height={42}
+                    alt="kakaotalk"
+                    src="/assets/kakaotalk-icon.svg"
+                  />
                 </Link>
               </div>
             </div>

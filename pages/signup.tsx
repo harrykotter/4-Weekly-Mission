@@ -10,7 +10,7 @@ import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
-import { setAxiosHeader } from "@/src/util/setAxiosToken";
+// import { setAxiosHeader } from "@/src/util/setAxiosToken";
 
 interface FormValue {
   email: string;
@@ -22,9 +22,11 @@ const Signup: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
-  const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] = useState<boolean>(false);
+  const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] =
+    useState<boolean>(false);
 
-  const postCheckAccount = (data: FormValue) => axiosInstance.post("sign-up", data);
+  const postCheckAccount = (data: FormValue) =>
+    axiosInstance.post("sign-up", data);
   const { wrappedFunction: postSignup } = useAsync<any>(postCheckAccount);
 
   const {
@@ -39,7 +41,9 @@ const Signup: React.FC = () => {
   const handlePasswordEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
   };
-  const handlePasswordConfirmEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
+  const handlePasswordConfirmEyeconClick: MouseEventHandler<
+    HTMLImageElement
+  > = () => {
     setIsPasswordConfirmOpen(!isPasswordConfirmOpen);
   };
 
@@ -48,7 +52,7 @@ const Signup: React.FC = () => {
     if (response?.status === 200) {
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
-      setAxiosHeader(accessToken.data.accessToken);
+      // setAxiosHeader(accessToken.data.accessToken);
       Router.push("/folder");
     }
   };
@@ -61,20 +65,23 @@ const Signup: React.FC = () => {
       <div className={styles.SignPage}>
         <div className={styles.FormWrapper}>
           <div className={styles.SignHeader}>
-            <Link href='/'>
+            <Link href="/">
               <Image
                 width={210}
                 height={40}
-                src='/assets/linkbrary.svg'
-                alt='Linkbrary 서비스 로고'
+                src="/assets/linkbrary.svg"
+                alt="Linkbrary 서비스 로고"
               />
             </Link>
             <div className={styles.SignMsg}>
-              이미 회원이신가요? <Link href='/signin'>로그인하기</Link>
+              이미 회원이신가요? <Link href="/signin">로그인하기</Link>
             </div>
           </div>
           <form className={styles.InputForm} onSubmit={handleSubmit(onSubmit)}>
-            <CreateEmailInput register={register} inputError={errors.email?.message} />
+            <CreateEmailInput
+              register={register}
+              inputError={errors.email?.message}
+            />
             <CreatePasswordInput
               register={register}
               inputError={errors.password?.message}
@@ -88,17 +95,27 @@ const Signup: React.FC = () => {
               passwordValue={passwordValue}
               handleEyeconClick={handlePasswordConfirmEyeconClick}
             />
-            <button className={styles.SubmitButton} type='submit'>
+            <button className={styles.SubmitButton} type="submit">
               회원 가입하기
             </button>
             <div className={styles.SocialButton}>
               다른 방식으로 가입하기
               <div className={styles.IconWrapper}>
-                <Link href='https://www.google.com'>
-                  <Image width={42} height={42} alt='google' src='/assets/google-icon.svg' />
+                <Link href="https://www.google.com">
+                  <Image
+                    width={42}
+                    height={42}
+                    alt="google"
+                    src="/assets/google-icon.svg"
+                  />
                 </Link>
-                <Link href='https://www.kakaocorp.com/page'>
-                  <Image width={42} height={42} alt='kakaotalk' src='/assets/kakaotalk-icon.svg' />
+                <Link href="https://www.kakaocorp.com/page">
+                  <Image
+                    width={42}
+                    height={42}
+                    alt="kakaotalk"
+                    src="/assets/kakaotalk-icon.svg"
+                  />
                 </Link>
               </div>
             </div>

@@ -9,11 +9,17 @@ import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
 
 import styles from "@/styles/pages/FolderPage.module.css";
-import { useState, useRef, useEffect, ChangeEventHandler, MouseEventHandler } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  ChangeEventHandler,
+  MouseEventHandler,
+} from "react";
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router from "next/router";
-import { setAxiosHeader } from "@/src/util/setAxiosToken";
+// import { setAxiosHeader } from "@/src/util/setAxiosToken";
 import { useGetLinks } from "@/src/hooks/useGetLink";
 import { axiosInstance } from "@/src/util/axiosInstance";
 
@@ -50,9 +56,11 @@ const FolderPage: React.FC = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      setAxiosHeader();
+      // setAxiosHeader();
       getLinks(folderId).then((response) => setLinksData(response.data));
-      getFolderList().then((response) => setFolderData(response?.data?.data.folder));
+      getFolderList().then((response) =>
+        setFolderData(response?.data?.data.folder),
+      );
     } else Router.push("/signin");
   }, [folderId]);
 
@@ -87,13 +95,13 @@ const FolderPage: React.FC = () => {
       ([entry]) => {
         setIsAddLinkShown(entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
     const footerObserver = new IntersectionObserver(
       ([entry]) => {
         setIsFooterShown(entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
     if (addLinkRef.current) {
       addLinkObserver.observe(addLinkRef.current);
@@ -115,8 +123,10 @@ const FolderPage: React.FC = () => {
   const filteredLinks = linksData?.filter(
     (link) =>
       link.title?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-      link.description?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      link.description
+        ?.toLowerCase()
+        .includes(searchTerm.trim().toLowerCase()) ||
+      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase()),
   );
 
   return (
@@ -149,11 +159,18 @@ const FolderPage: React.FC = () => {
               categoryId={folderId.toString()}
               handleModalClick={handleModalClick}
             />
-            <EditLink currentCategory={currentCategory} handleEditClick={handleModalClick} />
+            <EditLink
+              currentCategory={currentCategory}
+              handleEditClick={handleModalClick}
+            />
             {filteredLinks && filteredLinks.length > 0 ? (
               <CardList>
                 {filteredLinks?.map((link) => (
-                  <Card key={link?.id} {...link} handleModalClick={handleModalClick} />
+                  <Card
+                    key={link?.id}
+                    {...link}
+                    handleModalClick={handleModalClick}
+                  />
                 ))}
               </CardList>
             ) : (
