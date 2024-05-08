@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 import { getElapsedTime } from "./getElapsedTime";
 
 interface Folder {
@@ -33,7 +33,8 @@ export type FolderData = {
 };
 
 export const mapFolderData = (folder: Folder): FolderData => {
-  if (!folder) return { profileImage: "", ownerName: "", folderName: "", links: [] };
+  if (!folder)
+    return { profileImage: "", ownerName: "", folderName: "", links: [] };
   const { name, owner, links } = folder;
 
   const mapLinks = (link: Link) => {

@@ -11,6 +11,7 @@ import Head from "next/head";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router, { useRouter } from "next/router";
 import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
+import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
 
 interface FolderData {
   data: {
@@ -63,11 +64,15 @@ const SharedPage = () => {
   const getFolderOwner = async (id: number) => axiosInstance.get(`users/${id}`);
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
-  const { wrappedFunction: getLinksByFolderId } = useAsync(useGetLinksByFolderId);
+  const { wrappedFunction: get0FolderInfo } =
+    useAsync<FolderData>(useGetFolderInfo);
+  const { wrappedFunction: getLinksByFolderId } = useAsync(
+    useGetLinksByFolderId,
+  );
 
   useEffect(() => {
-    if (folderId) {
-      getFolderInfo(folderId).then((result) => {
+    if (folderId?.length === 1) {
+      getFolderInfo(folderId[0]).then((result) => {
         setFolderData(result?.data);
         const ownerId = result?.data.data[0].user_id;
         if (ownerId) {
@@ -75,6 +80,8 @@ const SharedPage = () => {
           getLinksByFolderId(ownerId, folderId).then(setLinkData);
         }
       });
+    } else if (folderId === undefined) {
+      get0FolderInfo().then(setFolderData);
     }
   }, [folderId]);
 
@@ -88,8 +95,10 @@ const SharedPage = () => {
   const filteredLinks = linkData?.data?.filter(
     (link) =>
       link.alt?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-      link.description?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      link.description
+        ?.toLowerCase()
+        .includes(searchTerm.trim().toLowerCase()) ||
+      link.url.toLowerCase().includes(searchTerm.trim().toLowerCase()),
   );
 
   return (
@@ -100,7 +109,9 @@ const SharedPage = () => {
       <Layout>
         <div className={styles.SharedPage}>
           <FolderInfo
-            profileImage={userData?.data[0]?.image_source || "/assets/profile-default.svg"}
+            profileImage={
+              userData?.data[0]?.image_source || "/assets/profile-default.svg"
+            }
             ownerName={userData?.data[0]?.name}
             folderName={folderData?.data[0]?.name}
           />

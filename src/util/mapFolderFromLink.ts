@@ -23,7 +23,9 @@ interface Link {
   favorite?: boolean;
 }
 
-export const mapFolderFromLink: (data: Link[]) => { data: MappedLink[] } = (data) => {
+export const mapFolderFromLink: (data: Link[]) => { data: MappedLink[] } = (
+  data,
+) => {
   if (!data) return { data: [] };
 
   const mapLinks = (link: Link) => {

@@ -18,7 +18,7 @@ import {
 } from "react";
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 // import { setAxiosHeader } from "@/src/util/setAxiosToken";
 import { useGetLinks } from "@/src/hooks/useGetLink";
 import { axiosInstance } from "@/src/util/axiosInstance";
@@ -33,12 +33,16 @@ interface Folder {
 }
 
 const FolderPage: React.FC = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  if (id !== undefined && !(id.length > 2 && /^\d+$/.test(id[0])))
+    Router.push("/");
   const getFolderData = () => axiosInstance.get("folders");
   const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 
   const [currentCategory, setCurrentCategory] = useState("전체");
-  const [folderId, setFolderId] = useState(0);
+  const [folderId, setFolderId] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
@@ -63,6 +67,12 @@ const FolderPage: React.FC = () => {
       );
     } else Router.push("/signin");
   }, [folderId]);
+
+  useEffect(() => {
+    id?.length
+      ? setFolderId(parseInt((id[0] as string) ?? 0, 10))
+      : setFolderId(0);
+  }, [id]);
 
   const folderDataWithAll = Array.isArray(folderData)
     ? [{ name: "전체", id: "0" }, ...folderData]
