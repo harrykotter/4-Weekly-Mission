@@ -7,6 +7,7 @@ import useAsync from "@/src/hooks/useAsync";
 import styles from "@/styles/pages/SharedPage.module.css";
 import { ChangeEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
+import ErrorPage from "next/error";
 
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router, { useRouter } from "next/router";
@@ -69,6 +70,7 @@ const SharedPage = () => {
   const { wrappedFunction: getLinksByFolderId } = useAsync(
     useGetLinksByFolderId,
   );
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (folderId?.length === 1) {
@@ -82,8 +84,12 @@ const SharedPage = () => {
       });
     } else if (folderId === undefined) {
       get0FolderInfo().then(setFolderData);
-    }
+    } else setIsError(true);
   }, [folderId]);
+
+  if (isError) {
+    return <ErrorPage statusCode={404} />;
+  }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchTerm(e.target.value);

@@ -7,6 +7,7 @@ import useAsync from "@/src/hooks/useAsync";
 import Category from "@/src/ui/Category";
 import { EditLink } from "@/src/ui/EditLink";
 import Modal from "@/src/ui/Modal/Modal";
+import ErrorPage from "next/error";
 
 import styles from "@/styles/pages/FolderPage.module.css";
 import {
@@ -35,8 +36,6 @@ interface Folder {
 const FolderPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  if (id !== undefined && !(id.length > 2 && /^\d+$/.test(id[0])))
-    Router.push("/");
   const getFolderData = () => axiosInstance.get("folders");
   const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
@@ -52,6 +51,7 @@ const FolderPage: React.FC = () => {
 
   const [isAddLinkShown, setIsAddLinkShown] = useState(true);
   const [isFooterShown, setIsFooterShown] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const addLinkRef = useRef(null);
   const footerRef = useRef(null);
@@ -69,6 +69,9 @@ const FolderPage: React.FC = () => {
   }, [folderId]);
 
   useEffect(() => {
+    if (!router.isReady) return;
+    if (id !== undefined && !(id.length > 2 && /^\d+$/.test(id[0])))
+      setIsError(true);
     id?.length
       ? setFolderId(parseInt((id[0] as string) ?? 0, 10))
       : setFolderId(0);
@@ -129,6 +132,10 @@ const FolderPage: React.FC = () => {
       }
     };
   }, []);
+
+  if (isError) {
+    return <ErrorPage statusCode={404} />;
+  }
 
   const filteredLinks = linksData?.filter(
     (link) =>
