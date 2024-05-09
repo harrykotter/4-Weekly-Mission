@@ -23,6 +23,7 @@ import Router, { useRouter } from "next/router";
 // import { setAxiosHeader } from "@/src/util/setAxiosToken";
 import { useGetLinks } from "@/src/hooks/useGetLink";
 import { axiosInstance } from "@/src/util/axiosInstance";
+import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
 
 interface Folder {
   created_at: string;
@@ -103,35 +104,41 @@ const FolderPage: React.FC = () => {
     setSearchTerm("");
   };
 
-  useEffect(() => {
-    const addLinkObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsAddLinkShown(entry.isIntersecting);
-      },
-      { threshold: 0 },
-    );
-    const footerObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterShown(entry.isIntersecting);
-      },
-      { threshold: 0 },
-    );
-    if (addLinkRef.current) {
-      addLinkObserver.observe(addLinkRef.current);
-    }
-    if (footerRef.current) {
-      footerObserver.observe(footerRef.current);
-    }
+  // useEffect(() => {
+  //   const addLinkObserver = new IntersectionObserver(
+  //     ([entry]) => {
+  //       setIsAddLinkShown(entry.isIntersecting);
+  //     },
+  //     { threshold: 0 },
+  //   );
+  //   const footerObserver = new IntersectionObserver(
+  //     ([entry]) => {
+  //       setIsFooterShown(entry.isIntersecting);
+  //     },
+  //     { threshold: 0 },
+  //   );
+  //   if (addLinkRef.current) {
+  //     addLinkObserver.observe(addLinkRef.current);
+  //   }
+  //   if (footerRef.current) {
+  //     footerObserver.observe(footerRef.current);
+  //   }
 
-    return () => {
-      if (addLinkRef.current) {
-        addLinkObserver.unobserve(addLinkRef.current);
-      }
-      if (footerRef.current) {
-        footerObserver.unobserve(footerRef.current);
-      }
-    };
-  }, []);
+  //   return () => {
+  //     if (addLinkRef.current) {
+  //       addLinkObserver.unobserve(addLinkRef.current);
+  //     }
+  //     if (footerRef.current) {
+  //       footerObserver.unobserve(footerRef.current);
+  //     }
+  //   };
+  // }, []);
+  useFloatingAddLinkBar({
+    setIsAddLinkShown,
+    setIsFooterShown,
+    addLinkRef,
+    footerRef,
+  });
 
   if (isError) {
     return <ErrorPage statusCode={404} />;
