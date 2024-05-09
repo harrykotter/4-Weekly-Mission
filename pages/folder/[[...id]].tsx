@@ -20,7 +20,6 @@ import {
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
-// import { setAxiosHeader } from "@/src/util/setAxiosToken";
 import { useGetLinks } from "@/src/hooks/useGetLink";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
@@ -61,7 +60,6 @@ const FolderPage: React.FC = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      // setAxiosHeader();
       getLinks(folderId).then((response) => setLinksData(response.data));
       getFolderList().then((response) =>
         setFolderData(response?.data?.data.folder),
@@ -104,35 +102,6 @@ const FolderPage: React.FC = () => {
     setSearchTerm("");
   };
 
-  // useEffect(() => {
-  //   const addLinkObserver = new IntersectionObserver(
-  //     ([entry]) => {
-  //       setIsAddLinkShown(entry.isIntersecting);
-  //     },
-  //     { threshold: 0 },
-  //   );
-  //   const footerObserver = new IntersectionObserver(
-  //     ([entry]) => {
-  //       setIsFooterShown(entry.isIntersecting);
-  //     },
-  //     { threshold: 0 },
-  //   );
-  //   if (addLinkRef.current) {
-  //     addLinkObserver.observe(addLinkRef.current);
-  //   }
-  //   if (footerRef.current) {
-  //     footerObserver.observe(footerRef.current);
-  //   }
-
-  //   return () => {
-  //     if (addLinkRef.current) {
-  //       addLinkObserver.unobserve(addLinkRef.current);
-  //     }
-  //     if (footerRef.current) {
-  //       footerObserver.unobserve(footerRef.current);
-  //     }
-  //   };
-  // }, []);
   useFloatingAddLinkBar({
     setIsAddLinkShown,
     setIsFooterShown,

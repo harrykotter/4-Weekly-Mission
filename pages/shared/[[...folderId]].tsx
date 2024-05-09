@@ -10,7 +10,7 @@ import Head from "next/head";
 import ErrorPage from "next/error";
 
 import { axiosInstance } from "@/src/util/axiosInstance";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
 import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
 

@@ -1,4 +1,4 @@
-import { MutableRefObject, Ref, SetStateAction, useEffect } from "react";
+import { MutableRefObject, SetStateAction, useEffect } from "react";
 
 interface RefProps {
   setIsAddLinkShown: (value: SetStateAction<boolean>) => void;
