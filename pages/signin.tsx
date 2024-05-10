@@ -9,7 +9,6 @@ import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import { axiosInstance } from "@/src/util/axiosInstance";
 import Router from "next/router";
-// import { setAxiosHeader } from "@/src/util/setAxiosToken";
 
 interface FormValue {
   email: string;
@@ -17,7 +16,7 @@ interface FormValue {
 }
 
 const Signin: React.FC = () => {
-  if (localStorage.getItem("accessToken")) Router.push("/folder");
+  // if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
@@ -42,7 +41,6 @@ const Signin: React.FC = () => {
       console.log(response);
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
-      // setAxiosHeader(accessToken.data.accessToken);
       Router.push("/folder");
     } else {
       setError("email", { message: "이메일을 확인해주세요" });

@@ -19,7 +19,7 @@ interface FormValue {
 }
 
 const Signup: React.FC = () => {
-  if (localStorage.getItem("accessToken")) Router.push("/folder");
+  // if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] =
@@ -52,7 +52,6 @@ const Signup: React.FC = () => {
     if (response?.status === 200) {
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
-      // setAxiosHeader(accessToken.data.accessToken);
       Router.push("/folder");
     }
   };
