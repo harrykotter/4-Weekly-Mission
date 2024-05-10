@@ -20,9 +20,10 @@ import {
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
-import { useGetLinks } from "@/src/hooks/useGetLink";
-import instance from "@/src/util/instance";
+// import { useGetLinks } from "@/src/hooks/useGetLink";
+// import instance from "@/src/util/instance";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
+import { getFolderData, getLinks } from "../api/folderPage";
 
 interface Folder {
   created_at: string;
@@ -36,8 +37,8 @@ interface Folder {
 const FolderPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const getFolderData = () => instance.get("folders");
-  const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
+  // const getFolderData = () => instance.get("folders");
+  const { wrappedFunction: getLink } = useAsync<any>(getLinks);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 
   const [currentCategory, setCurrentCategory] = useState("전체");
@@ -60,7 +61,7 @@ const FolderPage: React.FC = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      getLinks(folderId).then((response) => setLinksData(response?.data));
+      getLink(folderId).then((response) => setLinksData(response?.data));
       getFolderList().then((response) =>
         setFolderData(response?.data?.data.folder),
       );

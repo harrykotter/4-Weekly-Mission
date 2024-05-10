@@ -7,15 +7,16 @@ import Image from "next/image";
 import PasswordConfirmInput from "@/src/ui/PasswordConfirmInput";
 import CreatePasswordInput from "@/src/ui/CreatePasswordInput";
 import useAsync from "@/src/hooks/useAsync";
-import instance from "@/src/util/instance";
+// import instance from "@/src/util/instance";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
+import { postAccountCheck, FormValue } from "./api/signinPage";
 
-interface FormValue {
-  email: string;
-  password: string;
-  passwordConfirm?: string;
-}
+// interface FormValue {
+//   email: string;
+//   password: string;
+//   passwordConfirm?: string;
+// }
 
 const Signup: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
@@ -24,8 +25,8 @@ const Signup: React.FC = () => {
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] =
     useState<boolean>(false);
 
-  const postCheckAccount = (data: FormValue) => instance.post("sign-up", data);
-  const { wrappedFunction: postSignup } = useAsync<any>(postCheckAccount);
+  // const postCheckAccount = (data: FormValue) => instance.post("sign-up", data);
+  const { wrappedFunction: postSignup } = useAsync<any>(postAccountCheck);
 
   const {
     register,

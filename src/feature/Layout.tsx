@@ -1,8 +1,9 @@
-import { useGetUser } from "@/src/hooks/useGetUser";
+// import { useGetUser } from "@/src/hooks/useGetUser";
 import Footer from "./Footer/Footer";
 import NavigationBar from "./NavigationBar";
 import { ReactNode, RefObject, useEffect, useState } from "react";
 import useAsync from "../hooks/useAsync";
+import { getUser } from "@/pages/api/NavBarApi";
 
 interface layoutProps {
   children: ReactNode;
@@ -18,13 +19,13 @@ type Data = {
 } | null;
 
 const Layout = ({ children, isNavFixed, footerRef }: layoutProps) => {
-  const { wrappedFunction: getUser } = useAsync<Data>(useGetUser);
+  const { wrappedFunction: getUserData } = useAsync<Data>(getUser);
   const [data, setData] = useState<Data>(null);
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       setData(null);
     } else {
-      getUser().then(setData);
+      getUserData().then(setData);
     }
   }, []);
 

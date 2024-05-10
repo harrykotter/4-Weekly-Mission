@@ -9,10 +9,15 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
 import ErrorPage from "next/error";
 
-import instance from "@/src/util/instance";
+// import instance from "@/src/util/instance";
 import { useRouter } from "next/router";
-import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
-import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
+// import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
+// import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
+import {
+  getFolder,
+  getFolderOwner,
+  getLinksByFolderId,
+} from "../api/sharedPage";
 
 interface FolderData {
   data: {
@@ -61,15 +66,11 @@ const SharedPage = () => {
 
   const router = useRouter();
   const { folderId } = router.query;
-  const getFolder = async (id: number) => instance.get(`folders/${id}`);
-  const getFolderOwner = async (id: number) => instance.get(`users/${id}`);
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
   const { wrappedFunction: get0FolderInfo } =
-    useAsync<FolderData>(useGetFolderInfo);
-  const { wrappedFunction: getLinksByFolderId } = useAsync(
-    useGetLinksByFolderId,
-  );
+    useAsync<FolderData>(getFolderInfo);
+  const { wrappedFunction: getLinks } = useAsync(getLinksByFolderId);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const SharedPage = () => {
         const ownerId = result?.data.data[0].user_id;
         if (ownerId) {
           getOwner(ownerId).then((res) => setUserData(res?.data));
-          getLinksByFolderId(ownerId, folderId).then(setLinkData);
+          getLinks(ownerId, folderId).then(setLinkData);
         }
       });
     } else if (folderId === undefined) {

@@ -7,21 +7,21 @@ import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
-import instance from "@/src/util/instance";
+// import instance from "@/src/util/instance";
 import Router from "next/router";
+import { postUserInfo, FormValue } from "./api/signinPage";
 
-interface FormValue {
-  email: string;
-  password: string;
-}
+// export interface FormValue {
+//   email: string;
+//   password: string;
+// }
 
 const Signin: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
-
-  const postUserInfo = (signinData?: FormValue) =>
-    instance.post("sign-in", signinData);
+  // const postUserInfo = (signinData?: FormValue) =>
+  //   instance.post("sign-in", signinData);
   const { wrappedFunction: postSignin } = useAsync<any>(postUserInfo);
 
   const {
