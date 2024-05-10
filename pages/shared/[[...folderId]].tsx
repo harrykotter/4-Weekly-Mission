@@ -14,7 +14,7 @@ import {
   getFolder,
   getFolderOwner,
   getLinksByFolderId,
-} from "../api/sharedPage";
+} from "../api/sharedPageApi";
 
 interface FolderData {
   data: {
@@ -65,8 +65,8 @@ const SharedPage = () => {
   const { folderId } = router.query;
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
-  const { wrappedFunction: get0FolderInfo } =
-    useAsync<FolderData>(getFolderInfo);
+  // const { wrappedFunction: get0FolderInfo } =
+  //   useAsync<FolderData>(getFolderInfo);
   const { wrappedFunction: getLinks } = useAsync(getLinksByFolderId);
   const [isError, setIsError] = useState(false);
 
@@ -80,9 +80,11 @@ const SharedPage = () => {
           getLinks(ownerId, folderId).then(setLinkData);
         }
       });
-    } else if (folderId === undefined) {
-      get0FolderInfo().then(setFolderData);
-    } else setIsError(true);
+    }
+    // else if (folderId === undefined) {
+    //   get0FolderInfo().then(setFolderData);
+    // }
+    else setIsError(true);
   }, [folderId]);
 
   if (isError) {

@@ -21,7 +21,7 @@ import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
-import { getFolderData, getLinks } from "../api/folderPage";
+import { getFolderData, getLinks } from "../api/folderPageApi";
 
 interface Folder {
   created_at: string;

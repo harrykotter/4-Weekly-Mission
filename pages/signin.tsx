@@ -8,7 +8,7 @@ import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import Router from "next/router";
-import { postUserInfo, FormValue } from "./api/signinPage";
+import { postUserInfo, FormValue } from "./api/signPageApi";
 
 const Signin: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");

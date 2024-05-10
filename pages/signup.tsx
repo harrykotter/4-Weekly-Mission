@@ -9,7 +9,7 @@ import CreatePasswordInput from "@/src/ui/CreatePasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
-import { postAccountCheck, FormValue } from "./api/signinPage";
+import { postCreateAccount, FormValue } from "./api/signPageApi";
 
 const Signup: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
@@ -17,7 +17,7 @@ const Signup: React.FC = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const [isPasswordConfirmOpen, setIsPasswordConfirmOpen] =
     useState<boolean>(false);
-  const { wrappedFunction: postSignup } = useAsync<any>(postAccountCheck);
+  const { wrappedFunction: postSignup } = useAsync<any>(postCreateAccount);
 
   const {
     register,

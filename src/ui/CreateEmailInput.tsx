@@ -1,8 +1,8 @@
 import { UseFormRegister } from "react-hook-form";
 import InputLayout from "./InputLayout";
 import styles from "@/styles/pages/SignPage.module.css";
-import instance from "../util/instance";
 import useAsync from "../hooks/useAsync";
+import { postCheckEmail } from "@/pages/api/signPageApi";
 
 interface FormValue {
   email: string;
@@ -15,8 +15,6 @@ interface InputValue {
 }
 
 const CreateEmailInput = ({ register, inputError }: InputValue) => {
-  const postCheckEmail = (emailData: FormValue) =>
-    instance.post("check-email", emailData);
   const { wrappedFunction: postEmailValidation } = useAsync(postCheckEmail);
 
   return (
