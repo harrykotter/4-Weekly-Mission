@@ -9,7 +9,12 @@ interface Prop {
   handleEyeconClick?: any;
 }
 
-const InputLayout = ({ isEyeOpen, inputError, handleEyeconClick, children }: Prop) => {
+const InputLayout = ({
+  isEyeOpen,
+  inputError,
+  handleEyeconClick,
+  children,
+}: Prop) => {
   const eyecon = isEyeOpen ? "/assets/eye-on.svg" : "/assets/eye-off.svg";
 
   return (
@@ -17,8 +22,14 @@ const InputLayout = ({ isEyeOpen, inputError, handleEyeconClick, children }: Pro
       <div className={styles.InputWrapper}>
         {children}
         {isEyeOpen !== undefined && (
-          <button onClick={handleEyeconClick}>
-            <Image width={24} height={16} src={eyecon} alt='눈 아이콘' className={styles.eyecon} />
+          <button onClick={handleEyeconClick} type="button">
+            <Image
+              width={24}
+              height={16}
+              src={eyecon}
+              alt="눈 아이콘"
+              className={styles.eyecon}
+            />
           </button>
         )}
       </div>

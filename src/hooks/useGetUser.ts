@@ -1,8 +1,8 @@
-import { axiosInstance } from "../util/axiosInstance";
+import instance from "../util/instance";
 import { DEFAULT_PROFILE } from "../util/constant";
 
 export const useGetUser = async () => {
-  const response = await axiosInstance.get("users");
+  const response = await instance.get("users");
   const data = response.data ? response.data?.data[0] : null;
   const userData = data
     ? {

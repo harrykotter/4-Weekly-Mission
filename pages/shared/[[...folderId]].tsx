@@ -9,7 +9,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
 import ErrorPage from "next/error";
 
-import { axiosInstance } from "@/src/util/axiosInstance";
+import instance from "@/src/util/instance";
 import { useRouter } from "next/router";
 import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
 import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
@@ -61,8 +61,8 @@ const SharedPage = () => {
 
   const router = useRouter();
   const { folderId } = router.query;
-  const getFolder = async (id: number) => axiosInstance.get(`folders/${id}`);
-  const getFolderOwner = async (id: number) => axiosInstance.get(`users/${id}`);
+  const getFolder = async (id: number) => instance.get(`folders/${id}`);
+  const getFolderOwner = async (id: number) => instance.get(`users/${id}`);
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
   const { wrappedFunction: get0FolderInfo } =

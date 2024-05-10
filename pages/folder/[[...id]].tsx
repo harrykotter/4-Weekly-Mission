@@ -21,7 +21,7 @@ import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
 import { useGetLinks } from "@/src/hooks/useGetLink";
-import { axiosInstance } from "@/src/util/axiosInstance";
+import instance from "@/src/util/instance";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
 
 interface Folder {
@@ -36,7 +36,7 @@ interface Folder {
 const FolderPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const getFolderData = () => axiosInstance.get("folders");
+  const getFolderData = () => instance.get("folders");
   const { wrappedFunction: getLinks } = useAsync<any>(useGetLinks);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 
@@ -60,7 +60,7 @@ const FolderPage: React.FC = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      getLinks(folderId).then((response) => setLinksData(response.data));
+      getLinks(folderId).then((response) => setLinksData(response?.data));
       getFolderList().then((response) =>
         setFolderData(response?.data?.data.folder),
       );

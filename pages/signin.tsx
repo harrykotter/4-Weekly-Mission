@@ -7,7 +7,7 @@ import Image from "next/image";
 import EmailInput from "@/src/ui/EmailInput";
 import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
-import { axiosInstance } from "@/src/util/axiosInstance";
+import instance from "@/src/util/instance";
 import Router from "next/router";
 
 interface FormValue {
@@ -16,12 +16,12 @@ interface FormValue {
 }
 
 const Signin: React.FC = () => {
-  // if (localStorage.getItem("accessToken")) Router.push("/folder");
+  if (localStorage.getItem("accessToken")) Router.push("/folder");
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
   const postUserInfo = (signinData?: FormValue) =>
-    axiosInstance.post("sign-in", signinData);
+    instance.post("sign-in", signinData);
   const { wrappedFunction: postSignin } = useAsync<any>(postUserInfo);
 
   const {
@@ -38,7 +38,6 @@ const Signin: React.FC = () => {
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
     const response = await postSignin(data);
     if (response?.status === 200) {
-      console.log(response);
       const accessToken = response.data;
       localStorage.setItem("accessToken", accessToken.data.accessToken);
       Router.push("/folder");

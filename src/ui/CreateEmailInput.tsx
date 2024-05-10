@@ -1,7 +1,7 @@
 import { UseFormRegister } from "react-hook-form";
 import InputLayout from "./InputLayout";
 import styles from "@/styles/pages/SignPage.module.css";
-import { axiosInstance } from "../util/axiosInstance";
+import instance from "../util/instance";
 import useAsync from "../hooks/useAsync";
 
 interface FormValue {
@@ -15,17 +15,22 @@ interface InputValue {
 }
 
 const CreateEmailInput = ({ register, inputError }: InputValue) => {
-  const postCheckEmail = (emailData: FormValue) => axiosInstance.post("check-email", emailData);
+  const postCheckEmail = (emailData: FormValue) =>
+    instance.post("check-email", emailData);
   const { wrappedFunction: postEmailValidation } = useAsync(postCheckEmail);
 
   return (
     <InputLayout inputError={inputError}>
-      <label htmlFor='email'>이메일</label>
+      <label htmlFor="email">이메일</label>
       <input
-        id='email'
-        type='email'
-        placeholder='이메일을 입력해주세요'
-        className={!inputError ? styles.inputStyles : `${styles.inputStyles} ${styles.inputError}`}
+        id="email"
+        type="email"
+        placeholder="이메일을 입력해주세요"
+        className={
+          !inputError
+            ? styles.inputStyles
+            : `${styles.inputStyles} ${styles.inputError}`
+        }
         {...register("email", {
           required: "이메일을 입력해주세요",
           pattern: {
