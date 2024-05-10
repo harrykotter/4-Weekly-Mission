@@ -9,10 +9,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
 import ErrorPage from "next/error";
 
-// import instance from "@/src/util/instance";
 import { useRouter } from "next/router";
-// import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
-// import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
 import {
   getFolder,
   getFolderOwner,

@@ -1,5 +1,3 @@
-// import { useGetLinksByFolderId } from "@/src/hooks/useGetLinksByFolderId";
-// import { useGetFolderInfo } from "@/src/hooks/useGetFolderInfo";
 import instance from "@/src/util/instance";
 import { mapFolderData } from "@/src/util/mapFolderData";
 import { mapFolderFromLink } from "@/src/util/mapFolderFromLink";

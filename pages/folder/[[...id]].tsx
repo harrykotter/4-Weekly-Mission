@@ -20,8 +20,6 @@ import {
 import Head from "next/head";
 import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
-// import { useGetLinks } from "@/src/hooks/useGetLink";
-// import instance from "@/src/util/instance";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
 import { getFolderData, getLinks } from "../api/folderPage";
 
@@ -37,7 +35,6 @@ interface Folder {
 const FolderPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  // const getFolderData = () => instance.get("folders");
   const { wrappedFunction: getLink } = useAsync<any>(getLinks);
   const { wrappedFunction: getFolderList } = useAsync<any>(getFolderData);
 

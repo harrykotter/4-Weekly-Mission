@@ -1,4 +1,3 @@
-// import { useGetLinks } from "@/src/hooks/useGetLink";
 import instance from "@/src/util/instance";
 import { mapFolderFromLink } from "@/src/util/mapFolderFromLink";
 

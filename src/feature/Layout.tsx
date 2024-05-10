@@ -1,4 +1,3 @@
-// import { useGetUser } from "@/src/hooks/useGetUser";
 import Footer from "./Footer/Footer";
 import NavigationBar from "./NavigationBar";
 import { ReactNode, RefObject, useEffect, useState } from "react";

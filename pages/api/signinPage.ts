@@ -1,5 +1,4 @@
 import instance from "@/src/util/instance";
-// import { FormValue } from "../signin";
 
 export interface FormValue {
   email: string;
