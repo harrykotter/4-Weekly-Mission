@@ -7,8 +7,6 @@ const instance: AxiosInstance = axios.create({
 const getToken = () => {
   if (typeof window !== undefined) {
     const token = window.localStorage.getItem("accessToken");
-    // console.log(token);
-
     return token;
   }
   return "";

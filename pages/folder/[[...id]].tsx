@@ -45,7 +45,6 @@ const FolderPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [linksData, setLinksData] = useState<MappedLink[]>([]);
   const [folderData, setFolderData] = useState<Folder[]>([]);
-  // console.log(linksData);
 
   const [isAddLinkShown, setIsAddLinkShown] = useState(true);
   const [isFooterShown, setIsFooterShown] = useState(false);
