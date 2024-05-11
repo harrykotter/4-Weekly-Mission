@@ -30,8 +30,8 @@ const Signin: React.FC = () => {
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
     const response = await postSignin(data);
     if (response?.status === 200) {
-      const accessToken = response.data;
-      localStorage.setItem("accessToken", accessToken.data.accessToken);
+      const result = response.data;
+      localStorage.setItem("accessToken", result.accessToken);
       Router.push("/folder");
     } else {
       setError("email", { message: "이메일을 확인해주세요" });

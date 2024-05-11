@@ -6,11 +6,25 @@ export interface FormValue {
   passwordConfirm?: string;
 }
 
-export const postUserInfo = (data?: FormValue) =>
-  instance.post("auth/sign-in", data);
+export const postUserInfo = async (data?: FormValue) => {
+  const response = await instance.post("auth/sign-in", data);
+  return response;
+};
 
-export const postCreateAccount = (data: FormValue) =>
-  instance.post("auth/sign-up", data);
+export const postCreateAccount = async (data: FormValue) => {
+  const response = await instance.post("auth/sign-up", data);
+  console.log(response);
 
-export const postCheckEmail = (emailData: FormValue) =>
-  instance.post("users/check-email", emailData);
+  return response;
+};
+
+export const postCheckEmail = async (emailData: FormValue) => {
+  try {
+    const response = await instance.post("users/check-email", emailData);
+    return response;
+  } catch (error) {
+    if (error?.response) {
+      return error.response;
+    }
+  }
+};
