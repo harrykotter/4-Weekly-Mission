@@ -1,4 +1,4 @@
-import instance from "@/src/util/instance";
+import instance from "@/pages/api/instance";
 import { mapFolderFromLink } from "@/src/util/mapFolderFromLink";
 // import { mapFolderData } from "@/src/util/mapFolderData";
 

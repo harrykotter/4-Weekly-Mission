@@ -27,9 +27,8 @@ interface Folder {
   created_at: string;
   favorite: boolean;
   id: number;
-  link: { count: number };
   name: string;
-  user_id: number;
+  link_count: number;
 }
 
 const FolderPage: React.FC = () => {
@@ -46,6 +45,7 @@ const FolderPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [linksData, setLinksData] = useState<MappedLink[]>([]);
   const [folderData, setFolderData] = useState<Folder[]>([]);
+  // console.log(linksData);
 
   const [isAddLinkShown, setIsAddLinkShown] = useState(true);
   const [isFooterShown, setIsFooterShown] = useState(false);
@@ -59,9 +59,7 @@ const FolderPage: React.FC = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       getLink(folderId).then((response) => setLinksData(response?.data));
-      getFolderList().then((response) =>
-        setFolderData(response?.data?.data.folder),
-      );
+      getFolderList().then((response) => setFolderData(response.data));
     } else Router.push("/signin");
   }, [folderId]);
 

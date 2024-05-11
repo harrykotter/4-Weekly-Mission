@@ -1,4 +1,4 @@
-import instance from "@/src/util/instance";
+import instance from "@/pages/api/instance";
 
 export interface FormValue {
   email: string;

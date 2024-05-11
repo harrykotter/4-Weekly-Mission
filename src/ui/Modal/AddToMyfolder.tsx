@@ -2,16 +2,10 @@ import styles from "@/styles/ui/Modal.module.css";
 import Image from "next/image";
 import { MouseEventHandler, useState } from "react";
 
-interface Link {
-  count: number;
-  name: string;
-  id: number;
-}
-
 interface Category {
   id: number;
   name: string;
-  link: Link;
+  link_count: number;
 }
 
 function AddToMyFolder({
@@ -21,7 +15,7 @@ function AddToMyFolder({
   currentUrl: string;
   categoryData: Category[];
 }) {
-  const [selectedFolder, setSelectedFolder] = useState<number>();
+  const [selectedFolder, setSelectedFolder] = useState<number>(0);
 
   const handleFolderClick: MouseEventHandler<HTMLDivElement> = (e) => {
     setSelectedFolder(+e.currentTarget.id);
@@ -44,7 +38,7 @@ function AddToMyFolder({
             <span className={styles.folderButtonName}>{link.name}</span>
             <span
               className={styles.folderButtonLinks}
-            >{`${link?.link.count}개 링크`}</span>
+            >{`${link.link_count}개 링크`}</span>
             {selectedFolder === link.id && (
               <Image
                 width={14}
