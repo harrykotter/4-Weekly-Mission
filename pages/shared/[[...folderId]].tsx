@@ -17,74 +17,62 @@ import {
 } from "../api/sharedPageApi";
 
 interface FolderData {
-  data: {
-    id: number;
-    created_at: string;
-    name: string;
-    user_id: number;
-    favorite: boolean;
-  }[];
+  id: number;
+  created_at: string;
+  name: string;
+  user_id: number;
+  favorite: boolean;
 }
 interface userData {
-  data: {
-    id: number;
-    created_at: string;
-    name: string;
-    image_source: string;
-    email: string;
-    auth_id: string;
-  }[];
+  id: number;
+  created_at: string;
+  name: string;
+  image_source: string;
+  email: string;
+  auth_id: string;
 }
 interface LinkData {
-  data: {
-    id: number;
-    url: string;
-    imageSource: string;
-    title?: string;
-    alt: string;
-    elapsedTime: string;
-    description?: string;
-    createdAt: string;
-    favorite?: boolean;
-  }[];
+  id: number;
+  url: string;
+  imageSource: string;
+  title?: string;
+  alt: string;
+  elapsedTime: string;
+  description?: string;
+  createdAt: string;
+  favorite?: boolean;
 }
 
 const SharedPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [folderData, setFolderData] = useState<FolderData>({
-    data: [],
-  });
-  const [userData, setUserData] = useState<userData>({
-    data: [],
-  });
-  const [linkData, setLinkData] = useState<LinkData>({
-    data: [],
-  });
+  const [folderData, setFolderData] = useState<FolderData>();
+  const [userData, setUserData] = useState<userData>();
+  const [linkData, setLinkData] = useState<LinkData[]>([]);
 
   const router = useRouter();
   const { folderId } = router.query;
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
-  // const { wrappedFunction: get0FolderInfo } =
-  //   useAsync<FolderData>(getFolderInfo);
   const { wrappedFunction: getLinks } = useAsync(getLinksByFolderId);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (folderId?.length === 1) {
-      getFolderInfo(folderId[0]).then((result) => {
-        setFolderData(result?.data);
-        const ownerId = result?.data.data[0].user_id;
-        if (ownerId) {
-          getOwner(ownerId).then((res) => setUserData(res?.data));
-          getLinks(ownerId, folderId).then(setLinkData);
-        }
-      });
-    }
-    // else if (folderId === undefined) {
-    //   get0FolderInfo().then(setFolderData);
-    // }
-    else setIsError(true);
+      getFolderInfo(folderId[0])
+        .then((result) => {
+          setFolderData(result?.[0]);
+          const ownerId = result[0].user_id;
+          if (ownerId) {
+            getOwner(ownerId).then((res) => {
+              setUserData(res?.[0]);
+            });
+            getLinks(ownerId, folderId).then((res) => {
+              setLinkData(res?.data);
+            });
+          }
+        })
+        .catch(() => setIsError(true));
+    } else setIsError(true);
   }, [folderId]);
 
   if (isError) {
@@ -98,7 +86,7 @@ const SharedPage = () => {
     setSearchTerm("");
   };
 
-  const filteredLinks = linkData?.data?.filter(
+  const filteredLinks = linkData.filter(
     (link) =>
       link.alt?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
       link.description
@@ -116,10 +104,10 @@ const SharedPage = () => {
         <div className={styles.SharedPage}>
           <FolderInfo
             profileImage={
-              userData?.data[0]?.image_source || "/assets/profile-default.svg"
+              userData?.image_source || "/assets/profile-default.svg"
             }
-            ownerName={userData?.data[0]?.name}
-            folderName={folderData?.data[0]?.name}
+            ownerName={userData?.name}
+            folderName={folderData?.name}
           />
           <div className={styles.SharedPageItems}>
             <SearchBar
