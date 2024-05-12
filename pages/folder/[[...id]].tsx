@@ -22,6 +22,7 @@ import { MappedLink } from "@/src/util/mapFolderFromLink";
 import Router, { useRouter } from "next/router";
 import useFloatingAddLinkBar from "@/src/hooks/useFloatingAddLinkBar";
 import { getFolderData, getLinks } from "../api/folderPageApi";
+import { useQuery } from "@tanstack/react-query";
 
 interface Folder {
   created_at: string;
@@ -43,12 +44,19 @@ const FolderPage: React.FC = () => {
   const [modal, setModal] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [linksData, setLinksData] = useState<MappedLink[]>([]);
-  const [folderData, setFolderData] = useState<Folder[]>([]);
 
   const [isAddLinkShown, setIsAddLinkShown] = useState(true);
   const [isFooterShown, setIsFooterShown] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const { data: linksData } = useQuery<MappedLink[]>({
+    queryKey: ["links", folderId],
+    queryFn: () => getLink(folderId).then((response) => response?.data),
+  });
+  const { data: folderData } = useQuery<Folder[]>({
+    queryKey: ["folderList"],
+    queryFn: () => getFolderList().then((response) => response?.data),
+  });
 
   const addLinkRef = useRef(null);
   const footerRef = useRef(null);
@@ -56,11 +64,8 @@ const FolderPage: React.FC = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      getLink(folderId).then((response) => setLinksData(response?.data));
-      getFolderList().then((response) => setFolderData(response.data));
-    } else Router.push("/signin");
-  }, [folderId]);
+    if (!accessToken) Router.push("/signin");
+  }, []);
 
   useEffect(() => {
     if (!router.isReady) return;

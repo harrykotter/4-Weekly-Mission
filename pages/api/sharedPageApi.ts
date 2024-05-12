@@ -3,7 +3,7 @@ import { mapFolderFromLink } from "@/src/util/mapFolderFromLink";
 
 export const getFolder = async (id: number) => {
   const response = await instance.get(`folders/${id}`);
-  return response.data;
+  return response;
 };
 export const getFolderOwner = async (id: number) => {
   const response = await instance.get(`users/${id}`);

@@ -8,6 +8,7 @@ import styles from "@/styles/pages/SharedPage.module.css";
 import { ChangeEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
 import ErrorPage from "next/error";
+import { useQuery } from "@tanstack/react-query";
 
 import { useRouter } from "next/router";
 import {
@@ -23,7 +24,7 @@ interface FolderData {
   user_id: number;
   favorite: boolean;
 }
-interface userData {
+interface UserData {
   id: number;
   created_at: string;
   name: string;
@@ -45,37 +46,48 @@ interface LinkData {
 
 const SharedPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [folderData, setFolderData] = useState<FolderData>();
-  const [userData, setUserData] = useState<userData>();
-  const [linkData, setLinkData] = useState<LinkData[]>([]);
 
   const router = useRouter();
   const { folderId } = router.query;
   const { wrappedFunction: getFolderInfo } = useAsync(getFolder);
   const { wrappedFunction: getOwner } = useAsync(getFolderOwner);
   const { wrappedFunction: getLinks } = useAsync(getLinksByFolderId);
-  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    if (folderId?.length === 1) {
-      getFolderInfo(folderId[0])
-        .then((result) => {
-          setFolderData(result?.[0]);
-          const ownerId = result[0].user_id;
-          if (ownerId) {
-            getOwner(ownerId).then((res) => {
-              setUserData(res?.[0]);
-            });
-            getLinks(ownerId, folderId).then((res) => {
-              setLinkData(res?.data);
-            });
-          }
-        })
-        .catch(() => setIsError(true));
-    } else setIsError(true);
-  }, [folderId]);
+  const {
+    data: folderData,
+    isError: folderError,
+    isLoading: folderLoading,
+  } = useQuery<FolderData>({
+    queryKey: ["folderData", folderId],
+    queryFn: () =>
+      getFolderInfo(folderId?.[0]).then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Network response was not ok");
+        }
+        return response.data[0];
+      }),
+    enabled: !!folderId?.length,
+  });
 
-  if (isError) {
+  const { data: userData, isError: userError } = useQuery<UserData>({
+    queryKey: ["owner", folderData?.user_id],
+    queryFn: () =>
+      getOwner(folderData?.user_id).then((response) => {
+        return response[0];
+      }),
+    enabled: !!folderData?.user_id && !folderLoading,
+  });
+
+  const { data: linkData, isError: linkError } = useQuery<LinkData[]>({
+    queryKey: ["links", folderData?.user_id, folderId?.[0]],
+    queryFn: () =>
+      getLinks(folderData?.user_id, folderId?.[0]).then((response) => {
+        return response.data || [];
+      }),
+    enabled: !!folderData?.user_id && !folderLoading,
+  });
+
+  if (folderError || userError || linkError) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -86,7 +98,7 @@ const SharedPage = () => {
     setSearchTerm("");
   };
 
-  const filteredLinks = linkData.filter(
+  const filteredLinks = linkData?.filter(
     (link) =>
       link.alt?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
       link.description
