@@ -6,7 +6,7 @@ export interface FormValue {
   passwordConfirm?: string;
 }
 
-export const postUserInfo = async (data?: FormValue) => {
+export const postUserInfo = async (data: FormValue) => {
   const response = await instance.post("auth/sign-in", data);
   return response;
 };
@@ -19,12 +19,6 @@ export const postCreateAccount = async (data: FormValue) => {
 };
 
 export const postCheckEmail = async (emailData: FormValue) => {
-  try {
-    const response = await instance.post("users/check-email", emailData);
-    return response;
-  } catch (error) {
-    if (error?.response) {
-      return error.response;
-    }
-  }
+  const response = await instance.post("users/check-email", emailData);
+  return response;
 };

@@ -9,12 +9,30 @@ import PasswordInput from "@/src/ui/PasswordInput";
 import useAsync from "@/src/hooks/useAsync";
 import Router from "next/router";
 import { postUserInfo, FormValue } from "./api/signPageApi";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 const Signin: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
-
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
   const { wrappedFunction: postSignin } = useAsync<any>(postUserInfo);
+
+  const signInMutation = useMutation<
+    AxiosResponse<any, any>,
+    Error,
+    FormValue,
+    unknown
+  >({
+    mutationFn: postSignin,
+    onSuccess: (data: any) => {
+      localStorage.setItem("accessToken", data.data.accessToken);
+      Router.push("/folder");
+    },
+    onError: () => {
+      setError("email", { message: "이메일을 확인해주세요" });
+      setError("password", { message: "비밀번호를 확인해주세요" });
+    },
+  });
 
   const {
     register,
@@ -27,17 +45,8 @@ const Signin: React.FC = () => {
     setIsPasswordOpen(!isPasswordOpen);
   };
 
-  const onSubmit: SubmitHandler<FormValue> = async (data) => {
-    const response = await postSignin(data);
-    if (response?.status === 200) {
-      const result = response.data;
-      localStorage.setItem("accessToken", result.accessToken);
-      Router.push("/folder");
-    } else {
-      setError("email", { message: "이메일을 확인해주세요" });
-      setError("password", { message: "비밀번호를 확인해주세요" });
-    }
-  };
+  const onSubmit: SubmitHandler<FormValue> = async (data) =>
+    signInMutation.mutate(data);
 
   return (
     <>

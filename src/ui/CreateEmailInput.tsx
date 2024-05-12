@@ -39,7 +39,7 @@ const CreateEmailInput = ({ register, inputError }: InputValue) => {
           validate: {
             check: async (val) => {
               const response = await postEmailValidation({ email: val });
-              if (response.status !== 200) {
+              if (response?.status !== 200) {
                 return "이미 사용 중인 이메일입니다";
               }
             },

@@ -10,6 +10,8 @@ import useAsync from "@/src/hooks/useAsync";
 import Router from "next/router";
 import CreateEmailInput from "@/src/ui/CreateEmailInput";
 import { postCreateAccount, FormValue } from "./api/signPageApi";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 const Signup: React.FC = () => {
   if (localStorage.getItem("accessToken")) Router.push("/folder");
@@ -28,6 +30,19 @@ const Signup: React.FC = () => {
 
   const passwordValue = getValues("password");
 
+  const signUpMutation = useMutation<
+    AxiosResponse<any, any>,
+    Error,
+    FormValue,
+    unknown
+  >({
+    mutationFn: postSignup,
+    onSuccess: (data: any) => {
+      localStorage.setItem("accessToken", data.data.accessToken);
+      Router.push("/folder");
+    },
+  });
+
   const handlePasswordEyeconClick: MouseEventHandler<HTMLImageElement> = () => {
     setIsPasswordOpen(!isPasswordOpen);
   };
@@ -37,14 +52,8 @@ const Signup: React.FC = () => {
     setIsPasswordConfirmOpen(!isPasswordConfirmOpen);
   };
 
-  const onSubmit: SubmitHandler<FormValue> = async (data) => {
-    const response = await postSignup(data);
-    if (response?.status === 200) {
-      const result = response.data;
-      localStorage.setItem("accessToken", result.accessToken);
-      Router.push("/folder");
-    }
-  };
+  const onSubmit: SubmitHandler<FormValue> = async (data) =>
+    signUpMutation.mutate(data);
 
   return (
     <>
